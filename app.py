@@ -19,7 +19,6 @@ app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
 
 mongo = PyMongo(app)
 
-
 # -------------------- #
 #        Routes        #
 # -------------------- #
