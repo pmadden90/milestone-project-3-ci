@@ -2,52 +2,70 @@
 
 <h3>Add A Recipe</h3>
 <div class="row">
-    <form action="" method="POST" class="col s12">
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">assignment</i>
-                <input id="task_name" name="task_name" type="text">
-                <label for="icon_prefix">Recipe Name</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">subject</i>
-                <textarea name="recipe_description" id="recipe_description" class="materialize-textarea"></textarea>
-                <label for="icon_telephone">Recipe Description</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">today</i>
-                <input id="date_submitted" name="date_submitted" type="text" class="datepicker">
-                <label for="icon_prefix">Date Added</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="switch">
-                <label>
+	<form action="" method="POST" class="col s12">
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">assignment</i>
+				<input id="task_name" name="task_name" type="text">
+				<label for="icon_prefix">Recipe Name</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">subject</i>
+				<textarea name="recipe_description" id="recipe_description" class="materialize-textarea"></textarea>
+				<label for="icon_telephone">Recipe Description</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">today</i>
+				<input id="date_submitted" name="date_submitted" type="text" class="datepicker">
+				<label for="icon_prefix">Date Added</label>
+			</div>
+		</div>
+		<div class="row">
+			<span><em>Dietary Information</em></span>
+			<div class="switch">
+				<label>
                   <input id="contains_nuts" name="contains_nuts" type="checkbox">
                   <span class="lever"></span>
                   Does this recipe contain nuts?
                 </label>
-            </div>
-            <div class="switch">
-                <label>
+			</div>
+			<div class="switch">
+				<label>
                   <input id="gluten_free" name="gluten_free" type="checkbox">
                   <span class="lever"></span>
                   Does this recipe contain gluten?
                 </label>
-            </div>
-            <div class="switch">
-                <label>
+			</div>
+			<div class="switch">
+				<label>
                   <input id="vegan_friendly" name="vegan_friendly" type="checkbox">
                   <span class="lever"></span>
                   Is this recipe vegan-friendly?
                 </label>
-            </div>
-        </div>
+			</div>
+		</div>
+	</form>
+</div>
+<br>
+<div class="row">
+	<form action="" method="POST" class="col s12">
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">poll</i>
+				<select id="uom" name="unit_of_measurement">
+                <option value="" disabled selected>Choose your unit of measurement</option>
+                {% for uom in units_of_measurement %}
+                <option value="{{uom.uom_name}}">{{uom.uom_name}}</option>
+                {% endfor %}
+            </select>
+				<label>Unit of Measurement</label>
+			</div>
+		</div>
+		<br>
     </form>
 </div>
-
 {% endblock %}
