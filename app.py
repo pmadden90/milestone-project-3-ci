@@ -33,6 +33,13 @@ def add_recipe():
     uom_list = [uom for uom in _uom]
     return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
 
+"""INSERT RECIPE TO MONGODB FUNCTION"""
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    desserts = mongo.db.desserts
+    desserts.insert_one(request.form.to_dict())
+    return redirect(url_for('get_recipes'))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
         port=int(os.environ.get('PORT', 5000)),

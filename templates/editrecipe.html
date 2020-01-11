@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>Edit A Recipe</h3>
+<ul class="collapsible">
+	{% for dessert in recipes %}
+	<h1> {{dessert.recipe_name}}</h1>
+	<br>
+	<h3>{{dessert.recipe_description}}</h3>
+	{{dessert.date_submitted}}
+    <div class="col s6">
+        <a class="waves-effect waves-light btn btn-small-b"><i class="material-icons left">edit</i>Edit</a>
+    </div>
+    <div class="col s6">
+        <a class="waves-effect waves-light btn btn-small-r"><i class="material-icons left">delete</i>Delete Recipe</a>
+    </div>
+	<li>
+		<div class="collapsible-header"><i class="material-icons">warning</i>Dietary Information</div>
+		<div class="collapsible-body">
+			<div class="col s4">
+				<span>Contains Nuts</span>{{dessert.contains_nuts}}</div>
+			<div class="col s4">
+				<span>Gluten Free</span>{{dessert.gluten_free}}</div>
+			<div class="col s4">
+				<span>Vegan Friendly</span>{{dessert.vegan_friendly}}</div>
+		</div>
+	</li>
+	{% endfor %}
+
+	<li>
+		<div class="collapsible-header"><i class="material-icons">local_dining</i>Equipment Needed</div>
+		<div class="collapsible-body">
+			<span>Equipment required will feature here including links to purchase from Neven Maguire's range</span>
+		</div>
+	</li>
+	<li>
+		<div class="collapsible-header"><i class="material-icons">list</i>Ingredients</div>
+		<div class="collapsible-body"><span>Ingredients to appear here</span></div>
+	</li>
+	<li>
+		<div class="collapsible-header"><i class="material-icons">timer</i>Method</div>
+		<div class="collapsible-body"><span>Instructions for how to cook/bake will be here</span></div>
+	</li>
+</ul>
+{% endblock %}

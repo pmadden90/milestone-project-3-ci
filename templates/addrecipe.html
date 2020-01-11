@@ -2,11 +2,11 @@
 
 <h3>Add A Recipe</h3>
 <div class="row">
-	<form action="" method="POST" class="col s12">
+	<form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
 		<div class="row">
 			<div class="input-field col s12">
 				<i class="material-icons prefix">assignment</i>
-				<input id="task_name" name="task_name" type="text">
+				<input id="recipe_name" name="recipe_name" type="text">
 				<label for="icon_prefix">Recipe Name</label>
 			</div>
 		</div>
@@ -47,6 +47,9 @@
                   Is this recipe vegan-friendly?
                 </label>
 			</div>
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit Recipe
+    <i class="material-icons right">send</i>
+  </button>
 		</div>
 	</form>
 </div>

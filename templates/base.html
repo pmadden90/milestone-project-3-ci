@@ -15,6 +15,7 @@
 
 	<!-- Custom styles for this template -->
 	<link href="../static/css/heroic-features.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css"/>
 
 	<!-- Materialize CDN -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -61,7 +62,9 @@
 
 	<!-- Main Content -->
 	<div class="container">
-		{% block content %} {% endblock %}
+        <div class="page-effect">        
+		    {% block content %} {% endblock %}
+        </div>
 	</div>
 
 	<hr>
