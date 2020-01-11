@@ -43,13 +43,13 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">About</a>
+						<a class="nav-link" href="/add_recipe">Add Recipe</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Services</a>
+						<a class="nav-link" href="#">Edit Recipe</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="#">Login</a>
 					</li>
 				</ul>
 			</div>
@@ -107,9 +107,22 @@
 	<!--jQuery for Materialize-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-    $('.collapsible').collapsible();
-  });
+		$(document).ready(function() {
+            $('.collapsible').collapsible();
+        });
+        
+        document.getElementById("matfix").addEventListener("click", function(e) {
+	    e.stopPropagation();
+        });
+
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
 	</script>
 
 </body>
