@@ -29,9 +29,16 @@ def get_recipes():
 
 @app.route('/add_recipe')
 def add_recipe():
-    _uom = mongo.db.units_of_measurement.find()
-    uom_list = [uom for uom in _uom]
+   ### _uom = mongo.db.units_of_measurement.find()
+   ### uom_list = [uom for uom in _uom]
     return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
+
+@app.route('/edit_recipe')
+def edit_recipe(desserts_id):
+    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(desserts_id)})
+    all_desserts = mongo.db.desserts.find()
+    return render_template('editrecipe.html', recipe=the_recipe, desserts=all_desserts)
+
 
 """INSERT RECIPE TO MONGODB FUNCTION"""
 @app.route('/insert_recipe', methods=['POST'])
