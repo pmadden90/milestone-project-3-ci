@@ -34,10 +34,10 @@ def add_recipe():
     return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
 
 @app.route('/edit_recipe')
-def edit_recipe(desserts_id):
-    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(desserts_id)})
+def edit_recipe(dessert_id):
+    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})
     all_desserts = mongo.db.desserts.find()
-    return render_template('editrecipe.html', recipe=the_recipe, desserts=all_desserts)
+    return render_template('editrecipe.html', recipe=the_recipe, dessert=all_desserts)
 
 
 """INSERT RECIPE TO MONGODB FUNCTION"""
