@@ -5,10 +5,10 @@ body {
 /*Page Corner Fold Effect*/
 .page-effect {
     position: relative;
-    width: 30%;
+    width: 100%;
     padding: 1em 1.5em;
     margin: 2em auto;
-    color: #fff;
+    color: #000000 !important; 
     background-color: #FAEBD7; /*Antique White (Darker than Seashell)*/
     overflow: hidden;
 }
@@ -43,3 +43,5 @@ body {
     padding: 0 0.5;
     background-color: red;
 }
+
+/*Icon Styling*/
