@@ -39,8 +39,22 @@ def edit_recipe(dessert_id):
     all_desserts = mongo.db.desserts.find()
     return render_template('editrecipe.html', recipe=the_recipe, dessert=all_desserts)
 
+@app.route('/update_recipe/<dessert_id>', methods=["POST"])
+def update_recipe(dessert_id):
+    desserts = mongo.db.desserts
+    desserts.update( {'_id: ObjectId(dessert_id)'},
+    {
+        'recipe_name':request.form.get['recipe_name'],
+        'recipe_description':request.form.get['recipe_description'],
+        'ingredients':request.form.get['ingredients'],
+        'equipment_needed':request.form.get['equipment_needed'],
+        'method':request.form.get['method'],
+        'gluten_free':request.form.get['gluten_free'],
+        'contains_nuts':request.form.get['contains_nuts'],
+        'vegan_friendly':request.form.get['vegan_friendly']
+    })
+    return redirect(url_for('get_recipes'))
 
-"""INSERT RECIPE TO MONGODB FUNCTION"""
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     desserts = mongo.db.desserts
