@@ -61,6 +61,11 @@ def insert_recipe():
     desserts.insert_one(request.form.to_dict())
     return redirect(url_for('get_recipes'))
 
+@app.route('/delete_recipe/<dessert_id>')
+def delete_recipe(dessert_id):
+    mongo.db.desserts.remove({'_id': ObjectId(dessert_id)})
+    return redirect(url_for('get_recipes'))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
         port=int(os.environ.get('PORT', 5000)),

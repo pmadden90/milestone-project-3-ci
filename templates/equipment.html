@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
 <ul class="collapsible">
-	{% for dessert in recipes %}
-	<h1> {{dessert.recipe_name}}</h1>
+	{% for equipment in equipment %}
+	<h1> {{equipment.item_name}}</h1>
 	<br>
-	<h3>{{dessert.recipe_description}}</h3>
-	Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}
+	
+	<a href="{{equipment.item_url}}">Buy Here</a>
 	<li>
 		<div class="col s6">
 			<a href="{{ url_for('edit_recipe', dessert_id=dessert._id)}}" class="waves-effect waves-light btn btn-small-b"><i class="material-icons left">edit</i>Edit</a>
@@ -22,21 +22,6 @@
 		</div>
 	</li>
 	
-
-	<li>
-		<div class="collapsible-header"><i class="material-icons">local_dining</i>Equipment Needed</div>
-		<div class="collapsible-body">
-			<span>{{dessert.equipment_needed}}</span>
-		</div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="material-icons">list</i>Ingredients</div>
-		<div class="collapsible-body"><span>{{dessert.ingredients}}</span></div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="material-icons">timer</i>Method</div>
-		<div class="collapsible-body"><span>{{dessert.method}}</span></div>
-	</li>
     {% endfor %}
 </ul>
 {% endblock %}
