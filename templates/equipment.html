@@ -1,27 +1,35 @@
 {% extends 'base.html' %} {% block content %}
 
-<ul class="collapsible">
-	{% for equipment in equipment %}
-	<h1> {{equipment.item_name}}</h1>
-	<br>
-	
-	<a href="{{equipment.item_url}}">Buy Here</a>
-	<li>
-		<div class="col s6">
-			<a href="{{ url_for('edit_recipe', dessert_id=dessert._id)}}" class="waves-effect waves-light btn btn-small-b"><i class="material-icons left">edit</i>Edit</a>
-		</div>
-		
-		<div class="collapsible-header"><i class="material-icons">warning</i>Dietary Information</div>
-		<div class="collapsible-body">
-			<div class="col s4">
-				<span>Contains Nuts</span> - {{dessert.contains_nuts}}</div>
-			<div class="col s4">
-				<span>Gluten Free</span> - {{dessert.gluten_free}}</div>
-			<div class="col s4">
-				<span>Vegan Friendly</span> - {{dessert.vegan_friendly}}</div>
-		</div>
-	</li>
-	
-    {% endfor %}
-</ul>
+<!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Kitchen Essentials</h1>
+      <p class="lead">Buy kitchen essentials here</p>
+      <a href="https://www.dunnesstores.com/c/home/our-brands/cook-with-neven-maguire/utensils-and-gadgets" target="_blank" class="btn btn-primary btn-lg">Take Me Shopping</a>
+    </header>
+    {% for equipment in equipment %}
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          <div class="card-body">
+            <h4 class="card-title">{{equipment.item_name}}</h4>
+            <p class="card-text">Need to add pictures to MongoDB</p>
+          </div>
+          <div class="card-footer">
+            <a href="{{equipment.item_url}}" class="btn btn-primary">Buy Now!</a>
+          </div>
+        </div>
+      </div>      
+        {% endfor %}
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
 {% endblock %}

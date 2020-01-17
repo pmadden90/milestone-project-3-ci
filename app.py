@@ -22,6 +22,7 @@ mongo = PyMongo(app)
 # -------------------- #
 #        Routes        #
 # -------------------- #
+###RECIPES
 @app.route('/')
 @app.route('/get_recipes')
 def get_recipes():
@@ -65,6 +66,11 @@ def insert_recipe():
 def delete_recipe(dessert_id):
     mongo.db.desserts.remove({'_id': ObjectId(dessert_id)})
     return redirect(url_for('get_recipes'))
+
+###EQUIPMENT
+@app.route('/get_equipment')
+def get_equipment():
+    return render_template('equipment.html', equipment=mongo.db.equipment.find())
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
