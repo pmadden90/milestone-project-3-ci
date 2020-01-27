@@ -76,3 +76,12 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
         port=int(os.environ.get('PORT', 5000)),
         debug=True)
+
+# -------------------- #
+#   Other Functions    #
+# -------------------- #
+###Dropdown
+def dropdown_uom():
+    return [
+        item for measurement in unit_of_measurement.find()
+        for item in measurement.get("uom_name")]
