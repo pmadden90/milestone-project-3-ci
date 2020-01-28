@@ -46,4 +46,11 @@ body {
     color: white !important;
 }
 
+.add-another{
+    font-size: 14px;
+}
+
+.delete-ingredient{
+    font-size: 14px;
+}
 /*Icon Styling*/

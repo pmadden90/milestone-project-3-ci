@@ -30,8 +30,8 @@ def get_recipes():
 
 @app.route('/add_recipe')
 def add_recipe():
-   ### _uom = mongo.db.units_of_measurement.find()
-   ### uom_list = [uom for uom in _uom]
+    _uom = mongo.db.units_of_measurement.find()
+    uom_list = [uom for uom in _uom]
     return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
 
 @app.route('/edit_recipe/<dessert_id>')
