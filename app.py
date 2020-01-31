@@ -43,7 +43,7 @@ def edit_recipe(dessert_id):
 @app.route('/update_recipe/<dessert_id>', methods=["POST"])
 def update_recipe(dessert_id):
     desserts = mongo.db.desserts
-    desserts.update( {'_id: ObjectId(dessert_id)'},
+    desserts.update({"_id": ObjectId(dessert_id)}), ###{"$set": "/update_recipe/<dessert_id>": /update_recipe/<dessert_id>}
     {
         'recipe_name':request.form.get['recipe_name'],
         'recipe_description':request.form.get['recipe_description'],
@@ -53,7 +53,7 @@ def update_recipe(dessert_id):
         'gluten_free':request.form.get['gluten_free'],
         'contains_nuts':request.form.get['contains_nuts'],
         'vegan_friendly':request.form.get['vegan_friendly']
-    })
+    }
     return redirect(url_for('get_recipes'))
 
 @app.route('/insert_recipe', methods=['POST'])
