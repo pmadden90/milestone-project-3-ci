@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
-{% block title %}<h3 align="center">Editing {{ dessert.recipe_name }}</h3> {% endblock %}
+{% block title %}<h3 align="center">Editing {{ recipe.recipe_name }}</h3> {% endblock %}
 <div class="container-fluid">
 	<div class="row">
 		<div class="form-left col-md-6">
@@ -9,14 +9,14 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">assignment</i>
-							<input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{dessert.recipe_name}}">
+							<input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name}}">
 							<label for="icon_prefix">Recipe Name</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">subject</i>
-							<textarea name="recipe_description" id="recipe_description" class="materialize-textarea">{{dessert.recipe_description}}</textarea>
+							<textarea name="recipe_description" id="recipe_description" class="materialize-textarea">{{recipe.recipe_description}}</textarea>
 							<label for="icon_telephone">Recipe Description</label>
 						</div>
 					</div>					
@@ -26,7 +26,7 @@
                         <br>
 						<div class="switch">
 							<label>
-                                {% if dessert.contains_nuts %}
+                                {% if recipe.contains_nuts %}
                                     <input id="contains_nuts" name="contains_nuts" type="checkbox" checked>
                                 {% else %}
                                     <input id="contains_nuts" name="contains_nuts" type="checkbox">
@@ -37,7 +37,7 @@
 						</div>
 						<div class="switch">
 							<label>
-                                {% if dessert.gluten_free %}
+                                {% if recipe.gluten_free %}
                                     <input id="gluten_free" name="gluten_free" type="checkbox" checked>
                                 {% else %}
                                     <input id="gluten_free" name="gluten_free" type="checkbox">
@@ -48,7 +48,7 @@
 						</div>
 						<div class="switch">
 							<label>
-                                {% if dessert.vegan_friendly %}
+                                {% if recipe.vegan_friendly %}
                                     <input id="vegan_friendly" name="vegan_friendly" type="checkbox" checked>
                                 {% else %}
                                     <input id="vegan_friendly" name="vegan_friendly" type="checkbox">
@@ -60,7 +60,7 @@
 					</div>
                     <div class="row">
                         <div class="col s6">
-			                <a href="{{ url_for('delete_recipe', dessert_id=dessert._id) }}" class="btn waves-effect waves-light deep-orange darken-4"><i class="material-icons left">delete</i>Delete Recipe</a> 
+			                <a href="{{ url_for('delete_recipe', dessert_id=recipe._id) }}" class="btn waves-effect waves-light deep-orange darken-4"><i class="material-icons left">delete</i>Delete Recipe</a> 
                         </div>
                     </div>
 				</form>
@@ -72,21 +72,21 @@
                     <div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">local_dining</i>
-							<input id="equipment_needed" name="equipment_needed" type="text" autocomplete="off" value="{{dessert.equipment_needed}}">
+							<input id="equipment_needed" name="equipment_needed" type="text" autocomplete="off" value="{{recipe.equipment_needed}}">
 							<label for="icon_prefix">Equipment Needed</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">list</i>
-							<textarea name="ingredients" id="ingredients" class="materialize-textarea"><{{dessert.ingredients}}/textarea>
+							<textarea name="ingredients" id="ingredients" class="materialize-textarea"><{{recipe.ingredients}}</textarea>
 							<label for="icon_telephone">Ingredients</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">timer</i>
-							<textarea id="method" name="method" type="text" class="materialize-textarea">{{dessert.method}}</textarea>
+							<textarea id="method" name="method" type="text" class="materialize-textarea">{{recipe.method}}</textarea>
 							<label for="icon_prefix">Method</label>
 						</div>
 					</div>
@@ -112,43 +112,4 @@
     </div>
 </div>
 
-
-<!--<ul class="collapsible">
-	{% for dessert in recipes %}
-	<h1> {{dessert.recipe_name}}</h1>
-	<br>
-	<h3>{{dessert.recipe_description}}</h3>
-	{{dessert.date_submitted}}   
-    
-	<li>
-		<div class="collapsible-header"><i class="material-icons">warning</i>Dietary Information</div>
-		<div class="collapsible-body">
-			<div class="col s4">
-				<span>Contains Nuts</span>{{dessert.contains_nuts}}</div>
-			<div class="col s4">
-				<span>Gluten Free</span>{{dessert.gluten_free}}</div>
-			<div class="col s4">
-				<span>Vegan Friendly</span>{{dessert.vegan_friendly}}</div>
-		</div>
-	</li>    
-	{% endfor %}
-
-	<li>
-		<div class="collapsible-header"><i class="material-icons">local_dining</i>Equipment Needed</div>
-		<div class="collapsible-body">
-			<span>Equipment required will feature here including links to purchase from Neven Maguire's range</span>
-		</div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="material-icons">list</i>Ingredients</div>
-		<div class="collapsible-body"><span>Ingredients to appear here</span></div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="material-icons">timer</i>Method</div>
-		<div class="collapsible-body"><span>Instructions for how to cook/bake will be here</span></div>
-	</li>
-</ul>
-<div class="col s6">
-    <a class="waves-effect waves-light btn btn-small-r"><i class="material-icons left">delete</i>Delete Recipe</a>
-</div>-->
 {% endblock %}

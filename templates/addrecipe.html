@@ -9,14 +9,14 @@
 					<div class="col-xs-12 col-md-6">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">assignment</i>
-							<input id="recipe_name" name="recipe_name" type="text">
+							<input id="recipe_name" name="recipe_name" type="text" autocomplete="off">
 							<label for="icon_prefix">Recipe Name</label>
 						</div>
 					</div>
 					<div class="col-xs-12 col-md-6">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">assignment</i>
-							<input id="recipe_description" name="recipe_description" type="text">
+							<input id="recipe_description" name="recipe_description" type="text" autocomplete="off">
 							<label for="icon_prefix">Recipe Description</label>
 						</div>
 					</div>
@@ -26,20 +26,27 @@
 							<input id="date_submitted" name="date_submitted" type="text" class="datepicker" placeholder="dd/mm/yyyy">
 							<label for="icon_prefix">Date Added</label>
 						</div>
+					</div>					
+					<div class="col-xs-12 col-md-6">
+						<div class="input-field col s12 m12">
+							<i class="material-icons prefix">local_dining</i>
+							<input id="equipment_needed" name="equipment_needed" type="text" autocomplete="off">
+							<label for="icon_prefix">Equipment Needed</label>
+						</div>
 					</div>
                     <div class="col-xs-12 col-md-6">
 						<div class="input-field col s12 m12">
-							<i class="material-icons prefix">local_dining</i>
-							<input id="equipment_needed" name="equipment_needed" type="text">
-							<label for="icon_prefix">Equipment Needed</label>
+							<i class="material-icons prefix">create</i>
+							<input id="author" name="author" type="text">
+							<label for="icon_prefix">Author</label>
 						</div>
-					</div>					
+					</div>
 				</div>
 			</div>
 		</div>
-        <div class="row">
+		<div class="row">
 			<div class="form-right col-md-12">
-				<div class="row">					
+				<div class="row">
 					<!--<div class="col-xs-12">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">list</i>
@@ -54,33 +61,35 @@
 							<label for="icon_prefix">Method</label>
 						</div>
 					</div>-->
-                    
-                    <div class="add-ingredient row col-xs-12 col-md-12">
-                        <div class="input-field col-xs-12 col-md-2">
-                            <input id="quantity-ingredient" name="quantity-ingredient" type="text" class="quantity-ingredient validate" autocomplete="off" minlength="1" required>
-                            <label for="icon_prefix">Quantity</label>
-                        </div>
-                        <!--Unit of Measurement-->
-                        <div class="input-field col-xs-12 col-md-4"> <!--col s12 m4-->
-                            <i class="material-icons" aria-hidden="true">list</i>
-                            <select id="uom" name="uom" class="validate">
+
+					<div class="add-ingredient row col-xs-12 col-md-12">
+						<div class="input-field col-xs-12 col-md-2">
+							<input id="quantity-ingredient" name="quantity-ingredient" type="text" class="quantity-ingredient validate" autocomplete="off" minlength="1" required>
+							<label for="icon_prefix">Quantity</label>
+						</div>
+						<!--Unit of Measurement-->
+						<div class="input-field col-xs-12 col-md-4">
+							<!--col s12 m4-->
+							<i class="material-icons" aria-hidden="true">list</i>
+							<select id="uom" name="uom" class="validate">
                                 <option value="{{ uom }}" disabled selected>Unit of Measurement</option>
                                 {% for uom in _uom %}
                                     <option value="{{ uom }}">{{ uom }}</option>
                                 {% endfor %}
                             </select>
-                            <label for="uom">
+							<label for="uom">
                                 <em>Select Unit of Measurement</em>
                             </label>
+						</div>
+						<!--Ingredient-->
+						<div class="input-field col-xs-12 col-md-6">
+							<!--col s12 m5 l6-->
+							<i class="material-icons">shopping_basket</i>
+							<input id="ingredient validate" autocomplete="off" minlength="3" maxlength="60" placeholder="Ingredient" required>
                         </div>
-                        <!--Ingredient-->
-                        <div class="input-field col-xs-12 col-md-6"><!--col s12 m5 l6-->
-                            <i class="material-icons">shopping_basket</i>
-                            <input id="ingredient validate" autocomplete="off" minlength="3" maxlength="60" placeholder="Ingredient" required> 
-                        </div>
-                    </div>
-					<!--Unit of Measurements Options<div class="row">
-						<div class="input-field col s12">
+                        <!--Unit of Measurements Options
+						<div class="row">
+						    <div class="input-field col s12">
 							<i class="material-icons prefix">poll</i>
 							<select id="uom" name="unit_of_measurement">
                                 <option value="" disabled selected>Choose your unit of measurement</option>
@@ -89,23 +98,23 @@
                                 {% endfor %}
                             </select>
 							<label>Unit of Measurement</label>
-						</div>
-					</div>-->
-				</div>
-                <!--Add Another Line-->
-                <button type="button" class="add-another btn">
+						    </div>
+					    </div>-->
+					</div>
+					<!--Add Another Line-->
+					<button type="button" class="add-another btn">
                     <i class="material-icons add" aria-hidden="true"></i>
-                    Add
+                    Add Row
                 </button>
-                <!--Remove Line-->
-                <button type="button" class="delete-ingredient btn">
+					<!--Remove Line-->
+					<button type="button" class="delete-ingredient btn">
                     <i class="material-icons strikethrough_s" aria-hidden="true"></i>
                     Remove
                 </button>
-			</div>
-            <div class="row">
-				<span><em>Dietary Information</em></span>
-				    <br>
+				</div>
+				<div class="row">
+					<span><em>Dietary Information</em></span>
+					<br>
 					<br>
 					<div class="switch">
 						<label>
@@ -129,12 +138,12 @@
                         </label>
 					</div>
 				</div>
-                <div class="row">
-                    <button class="btn waves-effect waves-light green darken-1" type="submit" name="action">Submit Recipe
+				<div class="row">
+					<button class="btn waves-effect waves-light green darken-1" type="submit" name="action">Submit Recipe
                         <i class="material-icons right">send</i>
                     </button>
-                </div>
-		</div>
+				</div>
+			</div>
 	</form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>

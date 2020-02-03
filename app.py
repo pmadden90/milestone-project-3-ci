@@ -64,7 +64,7 @@ def insert_recipe():
 
 @app.route('/delete_recipe/<dessert_id>')
 def delete_recipe(dessert_id):
-    mongo.db.desserts.remove({'_id': ObjectId(dessert_id)})
+    mongo.db.desserts.DeleteOne({'_id': ObjectId(dessert_id)})
     return redirect(url_for('get_recipes'))
 
 ###EQUIPMENT
