@@ -34,6 +34,12 @@ def add_recipe():
     uom_list = [uom for uom in _uom]
     return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
 
+@app.route('/view_recipe/<dessert_id>')
+def view_recipe(dessert_id):
+    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})
+    all_desserts = mongo.db.desserts.find()
+    return render_template("viewrecipe.html", recipe=the_recipe, dessert=all_desserts)
+
 @app.route('/edit_recipe/<dessert_id>')
 def edit_recipe(dessert_id):
     the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})

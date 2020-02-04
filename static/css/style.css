@@ -2,6 +2,12 @@ body {
     background-color: #FFFAF0; /*Seashell*/
 }
 
+.navbar-dark .navbar-brand {
+    color: #fff;
+    font-family: Molle;
+    font-size: 2.5em;
+}
+
 /*Page Corner Fold Effect*/
 .page-effect {
     position: relative;
@@ -54,3 +60,10 @@ body {
     font-size: 14px;
 }
 /*Icon Styling*/
+
+.homepage-header {
+    font-family: 'Molle', cursive;
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+}
