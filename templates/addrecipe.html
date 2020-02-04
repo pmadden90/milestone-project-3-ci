@@ -64,7 +64,7 @@
 
 					<div class="add-ingredient row col-xs-12 col-md-12">
 						<div class="input-field col-xs-12 col-md-2">
-							<input id="quantity-ingredient" name="quantity-ingredient" type="text" class="quantity-ingredient validate" autocomplete="off" minlength="1" required>
+							<input id="quantity_ingredient" name="quantity_ingredient" type="text" class="quantity-ingredient validate" autocomplete="off" minlength="1" required>
 							<label for="icon_prefix">Quantity</label>
 						</div>
 						<!--Unit of Measurement-->
@@ -87,19 +87,7 @@
 							<i class="material-icons">shopping_basket</i>
 							<input id="ingredient validate" autocomplete="off" minlength="3" maxlength="60" placeholder="Ingredient" required>
                         </div>
-                        <!--Unit of Measurements Options
-						<div class="row">
-						    <div class="input-field col s12">
-							<i class="material-icons prefix">poll</i>
-							<select id="uom" name="unit_of_measurement">
-                                <option value="" disabled selected>Choose your unit of measurement</option>
-                                {% for uom in units_of_measurement %}
-                                <option value="{{uom.uom_name}}">{{uom.uom_name}}</option>
-                                {% endfor %}
-                            </select>
-							<label>Unit of Measurement</label>
-						    </div>
-					    </div>-->
+                        
 					</div>
 					<!--Add Another Line-->
 					<button type="button" class="add-another btn">
@@ -138,6 +126,15 @@
                         </label>
 					</div>
 				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+						<div class="input-field col s12 m12">
+							<i class="material-icons prefix">photo_album</i>
+							<input id="img_url" name="img_url" type="text" placeholder="Copy and paste url for image here">
+							<label for="icon_prefix">Image URL</label>
+						</div>
+					</div>    
+                </div>
 				<div class="row">
 					<button class="btn waves-effect waves-light green darken-1" type="submit" name="action">Submit Recipe
                         <i class="material-icons right">send</i>

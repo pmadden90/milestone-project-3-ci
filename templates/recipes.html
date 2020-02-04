@@ -1,22 +1,25 @@
 {% extends 'base.html' %} {% block content %}
-    <h1 align="center">Just Desserts</h1>
+<h1 align="center">Just Desserts</h1>
 
-	{% for dessert in recipes %}
+{% for dessert in recipes %}
+<div class="container">
 	<div class="row">
-        <div class="col-xs-12 col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="{{dessert.img_url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{dessert.recipe_name}}</h5>
-                    <p class="card-text">{{dessert.recipe_description}}</p>
-                    <footer>Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}</footer>
-                    <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}" class="waves-effect waves light-blue darken-3 btn btn-small-b"><i class="material-icons left">visibility</i>View</a>
-                </div>
-            </div>
-        </div>    
-    </div>	
-    
-   
-    {% endfor %}
+		<div class="col-xs-12 col-md-4 col-lg-4">
+			<div class="card" style="width: 16rem;">
+				<img src="{{dessert.img_url}}" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">{{dessert.recipe_name}}</h5>
+					<p class="card-text">{{dessert.recipe_description}}</p>
+					<footer>Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}</footer>
+					<a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
+						class="waves-effect waves light-blue darken-3 btn btn-small-b"><i class="material-icons left">visibility</i>View</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endfor %}
 
 {% endblock %}
