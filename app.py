@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
+from flask_bootstrap import Bootstrap
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -70,8 +71,12 @@ def insert_recipe():
 
 @app.route('/delete_recipe/<dessert_id>')
 def delete_recipe(dessert_id):
-    mongo.db.desserts.DeleteOne({'_id': ObjectId(dessert_id)})
+    mongo.db.desserts.deleteOne({'_id': ObjectId(dessert_id)})
     return redirect(url_for('get_recipes'))
+
+@app.route('/homepage_index')
+def homepage_index():    
+    return render_template("index.html", recipes=mongo.db.desserts.find())
 
 ###EQUIPMENT
 @app.route('/get_equipment')

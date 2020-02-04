@@ -1,73 +1,35 @@
-{% extends 'base.html' %} {% block content %}
-
-  <!-- Page Content -->
-  <div class="container">
-
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <h1 class="display-3">Just Desserts <i class="material-icons">cake</i></h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+      <p class="lead">A place for all your sweet treats - share your own and see what everyone else is sharing!</p>
+      <a href="/add_recipe" class="btn btn-primary btn-lg">Add My Recipe</a>
     </header>
+    {% extends 'base.html' %} {% block content %}
+  <!-- Page Content -->
+  <div class="container">   
 
+    {% for dessert in recipes %}
     <!-- Page Features -->
     <div class="row text-center">
 
       <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+        <div class="card h-100" style="width: 16rem;">
+          <img class="card-img-top" src="{{dessert.img_url}}" alt="">
           <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+            <h4 class="card-title">{{dessert.recipe_name}}</h4>
+            <p class="card-text">{{dessert.recipe_description}}</p>
+            <footer>Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}</footer>					
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+            <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
+						class="waves-effect waves light-blue darken-3 btn btn-small-b"><i class="material-icons left">visibility</i>View</a>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
+      
     </div>
     <!-- /.row -->
-
+    {% endfor %}
   </div>
   <!-- /.container -->
 
