@@ -26,7 +26,9 @@ For some/all of your features, you may choose to reference the specific project 
 In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-- Another feature idea
+- Initially, I attempted to set up a virtualenv as per suggestion of mentor however after discussing with a tutor via webchat, I discovered that a virtualenv is more difficult to set up on Gitpod 
+so this was abandoned. 
+- A rating system - up to 5 stars
 
 ## Technologies Used
 

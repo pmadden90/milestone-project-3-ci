@@ -8,11 +8,11 @@
   <!-- Page Content -->
   <div class="container">   
 
-    {% for dessert in recipes %}
+    
     <!-- Page Features -->
     <div class="row text-center">
-
-      <div class="col-lg-3 col-md-6 mb-4">
+        {% for dessert in recipes %}
+            <div class="col-xs-12 col-lg-4 col-md-6 mb-4">
         <div class="card h-100" style="width: 16rem;">
           <img class="card-img-top" src="{{dessert.img_url}}" alt="">
           <div class="card-body">
@@ -25,11 +25,11 @@
 						class="waves-effect waves light-blue darken-3 btn btn-small-b"><i class="material-icons left">visibility</i>View</a>
           </div>
         </div>
-      </div>
-      
+            </div>
+        {% endfor %}
     </div>
     <!-- /.row -->
-    {% endfor %}
+    
   </div>
   <!-- /.container -->
 
