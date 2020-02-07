@@ -25,6 +25,10 @@ mongo = PyMongo(app)
 # -------------------- #
 ###RECIPES
 @app.route('/')
+@app.route('/homepage_index')
+def homepage_index():    
+    return render_template("index.html", recipes=mongo.db.desserts.find())
+
 @app.route('/get_recipes')
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.desserts.find())
@@ -73,10 +77,6 @@ def insert_recipe():
 def delete_recipe(dessert_id):
     mongo.db.desserts.deleteOne({'_id': ObjectId(dessert_id)})
     return redirect(url_for('get_recipes'))
-
-@app.route('/homepage_index')
-def homepage_index():    
-    return render_template("index.html", recipes=mongo.db.desserts.find())
 
 ###EQUIPMENT
 @app.route('/get_equipment')
