@@ -1,8 +1,7 @@
 # Just Desserts
 
-One or two paragraphs providing an overview of your project.
-
-Essentially, this part is your sales pitch.
+Just Desserts is a web based application for sharing recipes for desserts.
+Users can add their own recipes (and then edit or delete them) or read other users' recipes. 
  
 ## UX
  
@@ -28,7 +27,7 @@ In addition, you may also use this section to discuss plans for additional featu
 ### Features Left to Implement
 - Initially, I attempted to set up a virtualenv as per suggestion of mentor however after discussing with a tutor via webchat, I discovered that a virtualenv is more difficult to set up on Gitpod 
 so this was abandoned. 
-- A rating system - up to 5 stars
+- A rating system - up to 5 stars.
 
 ## Technologies Used
 
@@ -36,6 +35,16 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
+- [Materialize] (https://materializecss.com/)
+    - The project uses **Materialize** for styling and layout.
+- [Bootstrap]  (https://getbootstrap.com/)
+    - The project uses **Bootstrap** for styling and layout.
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+    - The project uses **Flask* to...
+- [MongoDB] https://www.mongodb.com/)
+    - The project uses **MongoDB** for creating, reading, updating and deleting data from a database.
+- [Heroku]  (https://Heroku.com/)
+    - The project uses **Heroku** for deploying and hosting the app.
 
 
 ## Testing
