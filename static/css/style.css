@@ -68,8 +68,8 @@ body {
     padding-right: auto;
 }
 
-.masthead {
-    background-image: url("../static/img/just-desserts-logo.jpg");
+.masthead-image {
+    background-image: url({{ url_for('static', filename='img/just-desserts-logo.jpg') }})
 }
 
 .full-width {
