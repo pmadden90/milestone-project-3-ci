@@ -1,9 +1,9 @@
     <!-- Jumbotron Header -->
     <div class="masthead-image"> 
         <header class="jumbotron my-4" align="center">
-            <!--<img src="../static/img/just-desserts-logo.jpg" style="width: 100vw">-->
-            <h1 class="display-3">Just Desserts <i class="material-icons">cake</i></h1>
-            <p class="lead">A place for all your sweet treats - share your own and see what everyone else is sharing!</p>
+            <h1 class="display-3">Just Desserts <i class="fas fa-utensil-spoon"></i></h1>
+            <p class="lead">A place for all your sweet treats -
+             share your own and see what everyone else is sharing!</p>
             <a href="/add_recipe" class="btn btn-primary btn-lg">Add My Recipe</a>
         </header>
     </div>
@@ -24,9 +24,15 @@
             <p class="card-text">{{dessert.recipe_description}}</p>
             <footer>Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}</footer>					
           </div>
-          <div class="card-footer">
-            <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
-						class="waves-effect waves light-blue darken-3 btn btn-small-b"><i class="material-icons left">visibility</i>View</a>
+          <div class="card-footer">            
+                <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
+						class="waves-effect waves">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-eye">
+                        View
+                        </i>
+                    </button>                        
+                </a>              
           </div>
         </div>
             </div>

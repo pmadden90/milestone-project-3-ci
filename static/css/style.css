@@ -12,8 +12,8 @@ body {
 .page-effect {
     position: relative;
     width: 100%;
-    padding: 1em 1.5em;
-    margin: 2em auto;
+    padding: .5em 1em;
+    margin: 1em auto;
     color: #000000; 
     background-color: #FAEBD7; /*Antique White (Darker than Seashell)*/
     overflow: hidden;
@@ -24,7 +24,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    border-width: 0 16px 16px 0;
+    border-width: 0 12px 12px 0;
     border-style: solid;
     border-color: #fff #fff #FAEBD7 #FAEBD8;
     background: #FAEBD7;
@@ -69,7 +69,12 @@ body {
 }
 
 .masthead-image {
-    background-image: url({{ url_for('static', filename='img/just-desserts-logo.jpg') }})
+    background-image: url('../img/just-desserts-logo.jpg'); 
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+.jumbotron {
+    background-color: none;
 }
 
 .full-width {
