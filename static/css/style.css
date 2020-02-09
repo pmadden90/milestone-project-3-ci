@@ -67,3 +67,11 @@ body {
     padding-left: auto;
     padding-right: auto;
 }
+
+.masthead {
+    background-image: url("../static/img/just-desserts-logo.jpg");
+}
+
+.full-width {
+    width: 100vw;
+}

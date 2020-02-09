@@ -10,14 +10,14 @@
     
     {% extends 'base.html' %} {% block content %}
   <!-- Page Content -->
-  <div class="container">   
+  <div class="container full-width">   
 
     
     <!-- Page Features -->
     <div class="row text-center">
         {% for dessert in recipes %}
             <div class="col-xs-12 col-lg-4 col-md-6 mb-4">
-        <div class="card h-100" style="width: 16rem;">
+        <div class="card h-100" style="width: 14rem;">
           <img class="card-img-top" src="{{dessert.img_url}}" alt="">
           <div class="card-body">
             <h4 class="card-title">{{dessert.recipe_name}}</h4>
