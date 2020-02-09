@@ -2,6 +2,10 @@ body {
     background-color: #FFFAF0; /*Seashell*/
 }
 
+h1 {
+    font-family: Molle;
+}
+
 .navbar-dark .navbar-brand {
     color: #fff;
     font-family: Molle;
@@ -72,6 +76,7 @@ body {
     background-image: url('../img/just-desserts-logo.jpg'); 
     background-repeat: no-repeat;
     background-size: auto;
+    background-color: transparent;
 }
 .jumbotron {
     background-color: none;
