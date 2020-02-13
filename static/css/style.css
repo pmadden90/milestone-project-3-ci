@@ -5,7 +5,9 @@ body {
 h1 {
     font-family: Molle;
 }
-
+.navbar {
+    background-color: #2A1911; /*Same brown as image in masthead*/
+}
 .navbar-dark .navbar-brand {
     color: #fff;
     font-family: Molle;
@@ -73,13 +75,16 @@ h1 {
 }
 
 .masthead-image {
-    background-image: url('../img/just-desserts-logo.jpg'); 
+    background-image: url('../img/chocolate-homepage.jpg') !important; 
     background-repeat: no-repeat;
     background-size: auto;
     background-color: transparent;
+    height: 95vh;
+    width: 100vw;
 }
 .jumbotron {
-    background-color: none;
+    background-color: transparent !important;
+    color: #FAEBD8 !important;
 }
 
 .full-width {
