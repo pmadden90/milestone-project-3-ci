@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="form-left col-md-6">
 			<div class="row">
-				<form action="{{ url_for('update_recipe', dessert_id=dessert._id)}}" method="POST" class="col s12">
+				<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col s12">
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">assignment</i>
@@ -79,7 +79,7 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">list</i>
-							<textarea name="ingredients" id="ingredients" class="materialize-textarea"><{{recipe.ingredients}}</textarea>
+							<textarea name="ingredients" id="ingredients" class="materialize-textarea">{{recipe.ingredients}}</textarea>
 							<label for="icon_telephone">Ingredients</label>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 							<label for="icon_prefix">Method</label>
 						</div>
 					</div>
-					<!--Unit of Measurements Options<div class="row">
+					
 						<div class="input-field col s12">
 							<i class="material-icons prefix">poll</i>
 							<select id="uom" name="unit_of_measurement">
@@ -103,7 +103,7 @@
 						</div>
 					</div>-->
 					<br>
-                    <button class="btn waves-effect waves-light green darken-1" type="submit" name="action">Submit Edits
+                    <button class="btn waves-effect waves-light green darken-1" type="submit">Submit Edits
                             <i class="material-icons right">send</i>
                     </button>
                 </form>

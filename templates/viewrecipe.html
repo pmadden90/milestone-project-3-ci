@@ -6,12 +6,12 @@
         <img src="{{recipe.img_url}}" class="recipe-img" style="width:90%" alt="...">
     </div>
 	
-	<h1> {{dessert.recipe_name}}</h1>
+	<h1> {{recipe.recipe_name}}</h1>
 	<br>
     <a href="whatsapp://send?text=Check out this recipe from Just Desserts!" data-action="share/whatsapp/share"><i class="fa fa-share-alt"></i>Share via Whatsapp</a>
     <!--<i class="fab fa-whatsapp"></i>-->
     <br>
-	<h3>{{dessert.recipe_description}}</h3>
+	<h3>{{recipe.recipe_description}}</h3>
 	Recipe submitted by <em>{{recipe.author}}</em> on {{recipe.date_submitted}}
     <div class="col-xs-12 col-md-6">
 		<a href="{{ url_for('edit_recipe', dessert_id=recipe._id)}}" class="waves-effect waves-light btn btn-small-b"><i class="fa fa-edit"></i>Edit</a>

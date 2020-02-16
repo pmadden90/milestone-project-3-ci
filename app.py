@@ -29,33 +29,30 @@ mongo = PyMongo(app)
 def homepage_index():    
     return render_template("index.html", recipes=mongo.db.desserts.find())
 
-@app.route('/get_recipes')
+@app.route('/recipes')
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.desserts.find())
 
-@app.route('/add_recipe')
+@app.route('/recipes/new')
 def add_recipe():
-    _uom = mongo.db.units_of_measurement.find()
-    uom_list = [uom for uom in _uom]
-    return render_template("addrecipe.html", recipes=mongo.db.desserts.find())
+    _uom = mongo.db.units_of_measurement.find()    
+    return render_template("addrecipe.html", uom=_uom)
 
-@app.route('/view_recipe/<dessert_id>')
+@app.route('/recipe/<dessert_id>')
 def view_recipe(dessert_id):
     the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})
-    all_desserts = mongo.db.desserts.find()
-    return render_template("viewrecipe.html", recipe=the_recipe, dessert=all_desserts)
+    return render_template("viewrecipe.html", recipe=the_recipe)
 
-@app.route('/edit_recipe/<dessert_id>')
+@app.route('/recipe/<dessert_id>/edit')
 def edit_recipe(dessert_id):
-    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})
-    all_desserts = mongo.db.desserts.find()
-    return render_template('editrecipe.html', recipe=the_recipe, dessert=all_desserts)
+    the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})    
+    return render_template('editrecipe.html', recipe=the_recipe)
 
-@app.route('/update_recipe/<dessert_id>', methods=["POST"])
+@app.route('/recipe/<dessert_id>/update', methods=["POST"])
 def update_recipe(dessert_id):
+    import pdb; pdb.set_trace()
     desserts = mongo.db.desserts
-    desserts.update({"_id": ObjectId(dessert_id)}), ###{"$set": "/update_recipe/<dessert_id>": /update_recipe/<dessert_id>}
-    {
+    recipe_edit = {
         'recipe_name':request.form.get['recipe_name'],
         'recipe_description':request.form.get['recipe_description'],
         'ingredients':request.form.get['ingredients'],
@@ -65,21 +62,25 @@ def update_recipe(dessert_id):
         'contains_nuts':request.form.get['contains_nuts'],
         'vegan_friendly':request.form.get['vegan_friendly']
     }
+    desserts.update_one({"_id": ObjectId(dessert_id)}, recipe_edit),  
     return redirect(url_for('get_recipes'))
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     desserts = mongo.db.desserts
-    desserts.insert_one(request.form.to_dict())
+    # import pdb; pdb.set_trace()
+    recipe_to_be_inserted = request.form
+    recipe = recipe_to_be_inserted.to_dict()
+    desserts.insert_one(recipe)
     return redirect(url_for('get_recipes'))
 
-@app.route('/delete_recipe/<dessert_id>')
+@app.route('/recipe/<dessert_id>/delete')
 def delete_recipe(dessert_id):
-    mongo.db.desserts.deleteOne({'_id': ObjectId(dessert_id)})
+    mongo.db.desserts.delete_one({'_id': ObjectId(dessert_id)})
     return redirect(url_for('get_recipes'))
 
 ###EQUIPMENT
-@app.route('/get_equipment')
+@app.route('/equipment')
 def get_equipment():
     return render_template('equipment.html', equipment=mongo.db.equipment.find())
 
