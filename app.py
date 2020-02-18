@@ -65,7 +65,7 @@ def update_recipe(dessert_id):
     desserts.update_one({"_id": ObjectId(dessert_id)}, recipe_edit),  
     return redirect(url_for('get_recipes'))
 
-@app.route('/insert_recipe', methods=['POST'])
+@app.route('/recipe/insert', methods=['POST'])
 def insert_recipe():
     desserts = mongo.db.desserts
     # import pdb; pdb.set_trace()

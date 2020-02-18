@@ -88,6 +88,22 @@ h1 {
 
 
 
+/*Recipe Card Styling*/
+.card img {
+    height: 300px;
+}
+
+.card {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.recipe-container {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
 /*Masthead Styling*/
 
 .homepage-header {
