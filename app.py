@@ -27,7 +27,8 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/homepage_index')
 def homepage_index():    
-    return render_template("index.html", recipes=mongo.db.desserts.find())
+    return render_template("index.html", recipes=mongo.db.desserts.find()) 
+    # .aggregate([{$sample: {size: 5}}]);
 
 @app.route('/recipes')
 def get_recipes():
@@ -50,7 +51,7 @@ def edit_recipe(dessert_id):
 
 @app.route('/recipe/<dessert_id>/update', methods=["POST"])
 def update_recipe(dessert_id):
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     desserts = mongo.db.desserts
     recipe_edit = {
         'recipe_name':request.form.get['recipe_name'],

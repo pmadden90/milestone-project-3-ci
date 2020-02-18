@@ -8,42 +8,82 @@
 	
 	<h1> {{recipe.recipe_name}}</h1>
 	<br>
-    <a href="whatsapp://send?text=Check out this recipe from Just Desserts!" data-action="share/whatsapp/share"><i class="fa fa-share-alt"></i>Share via Whatsapp</a>
+    <a href="whatsapp://send?text=Check out this recipe from Just Desserts!" data-action="share/whatsapp/share" class="whatsapp-link"><i class="fa fa-whatsapp whatsapp"></i>Share via Whatsapp</a>
     <!--<i class="fab fa-whatsapp"></i>-->
     <br>
 	<h3>{{recipe.recipe_description}}</h3>
-	Recipe submitted by <em>{{recipe.author}}</em> on {{recipe.date_submitted}}
+	Recipe submitted by <em>{{recipe.author}}</em>
     <div class="col-xs-12 col-md-6">
 		<a href="{{ url_for('edit_recipe', dessert_id=recipe._id)}}" class="waves-effect waves-light btn btn-small-b"><i class="fa fa-edit"></i>Edit</a>
-	</div>    
-	<li>
-		<div class="collapsible-header"><i class="fa fa-exclamation-triangle"></i>Dietary Information</div>
-		<div class="collapsible-body">
-			<div class="col-xs-12 col-md-4">
+	</div>   
+	
+    
+</ul>
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h4 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fa fa-spoon"><label for="icon_prefix"> Equipment Needed</label></i>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        {{recipe.equipment_needed}}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h4 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fa fa-list"><label for="icon_prefix"> Ingredients</label></i>
+        </button>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        {{recipe.ingredients}}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h4 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <i class="fa fa-wrench"><label for="icon_prefix"> Method</label></i>
+        </button>
+      </h4>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        {{recipe.method}}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h4 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            <i class="fa fa-exclamation-triangle"><label for="icon_prefix"> Dietary Information</label></i>
+        </button>
+      </h4>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+            <div class="col-xs-12 col-md-4">
 				<span>Contains Nuts</span> - {{recipe.contains_nuts}}</div>
 			<div class="col-xs-12 col-md-4">
 				<span>Gluten Free</span> - {{recipe.gluten_free}}</div>
 			<div class="col-xs-12 col-md-4">
 				<span>Vegan Friendly</span> - {{recipe.vegan_friendly}}</div>
-		</div>
-	</li>
-	
-
-	<li>
-		<div class="collapsible-header"><i class="fa fa-utensil-spoon"></i>Equipment Needed</div>
-		<div class="collapsible-body">
-			<span>{{recipe.equipment_needed}}</span>
-		</div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="fa fa-clipboard-list"></i>Ingredients</div>
-		<div class="collapsible-body"><span>{{recipe.ingredients}}</span></div>
-	</li>
-	<li>
-		<div class="collapsible-header"><i class="fa fa-hourglass"></i>Method</div>
-		<div class="collapsible-body"><span>{{recipe.method}}</span></div>
-	</li>
-    
-</ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

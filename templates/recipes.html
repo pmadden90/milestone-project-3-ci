@@ -11,13 +11,13 @@
 				<div class="card-body">
 					<h5 class="card-title">{{dessert.recipe_name}}</h5>
 					<p class="card-text">{{dessert.recipe_description}}</p>
-					<footer>Recipe submitted by <em>{{dessert.author}}</em> on {{dessert.date_submitted}}</footer>
+					<footer>Recipe submitted by <em>{{dessert.author}}</em></footer>
 					<a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
 						class="waves-effect waves">
                         <button type="button" class="btn btn-primary btn-lg">
                         View
                         </button>
-                        </a>
+                    </a>
 				</div>
 			</div>
 		</div>
