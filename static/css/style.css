@@ -41,6 +41,15 @@ h1 {
     display: block; width: 0;
 }
 
+/*Icons Styling*/
+.fa {
+    font-size: 1.3em;
+}
+
+.fa label {
+    font-family: Molle;
+}
+
 /*Button Styling*/
 .btn-small-b {
     line-height: 24px;
@@ -65,7 +74,21 @@ h1 {
 .delete-ingredient{
     font-size: 14px;
 }
-/*Icon Styling*/
+
+/*Switch Styling*/
+ .switch {
+     padding: 5px;
+     margin: 5px;
+     margin-top: 25px;
+ }
+
+.dietary-info {
+    margin-left: 3em;
+}
+
+
+
+/*Masthead Styling*/
 
 .homepage-header {
     font-family: 'Molle', cursive;
