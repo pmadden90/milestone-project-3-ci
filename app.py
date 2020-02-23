@@ -50,8 +50,7 @@ def edit_recipe(dessert_id):
     return render_template('editrecipe.html', recipe=the_recipe)
 
 @app.route('/recipe/<dessert_id>/update', methods=["POST"])
-def update_recipe(dessert_id):
-    # import pdb; pdb.set_trace()
+def update_recipe(dessert_id):    
     desserts = mongo.db.desserts
     recipe_edit = {
         'recipe_name':request.form.get['recipe_name'],
@@ -68,8 +67,7 @@ def update_recipe(dessert_id):
 
 @app.route('/recipe/insert', methods=['POST'])
 def insert_recipe():
-    desserts = mongo.db.desserts
-    # import pdb; pdb.set_trace()
+    desserts = mongo.db.desserts    
     recipe_to_be_inserted = request.form
     recipe = recipe_to_be_inserted.to_dict()
     desserts.insert_one(recipe)
@@ -98,3 +96,6 @@ def dropdown_uom():
     return [
         item for measurement in unit_of_measurement.find()
         for item in measurement.get("uom_name")]
+
+
+    # import pdb; pdb.set_trace()

@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
-{% block title %}<h3 align="center">Editing {{ recipe.recipe_name }}</h3> {% endblock %}
+<h3 align="center">Editing {{ recipe.recipe_name }}</h3>
 <div class="container-fluid">
 	<div class="row">
 		<div class="form-left col-md-6">
@@ -11,7 +11,7 @@
                             <div class="form-group">
 							    <i class="fa fa-tag"><label for="icon_prefix">Recipe Name</label></i>
                                 <div class="row">
-                                    <input id="recipe_name" name="recipe_name" type="text" autocomplete="off" class="validate" value="{{recipe.recipe_name}}">
+                                    <input id="recipe_name" name="recipe_name" type="text" autocomplete="off" class="validate form-control form-control-lg" value="{{recipe.recipe_name}}">
                                 </div>							
 						    </div>   
                         </div>                     
