@@ -5,57 +5,65 @@
 	<form action="{{ url_for('insert_recipe') }}" method="POST" class="col-xs-12">
 		<div class="row">
 			<div class="form col-xs-12">
-				<div class="row">
+				<div class="row justify-content-md-center">
 					<div class="col-xs-12 col-md-4">
 						<div class="form-group">
-							<i class="fa fa-tag"><label for="icon_prefix">Recipe Name</label></i>
+							<i class="fa fa-tag"><label class="col-sm-2 col-form-label" for="icon_prefix">Recipe Name</label></i>
                             <div class="row">
                                 <input id="recipe_name" name="recipe_name" type="text" autocomplete="off" placeholder="Recipe Name">
                             </div>							
 						</div>
-						</div>
-						<div class="col-xs-12 col-md-6">
+					</div>
+					<div class="col-xs-12 col-md-6">
 							<div class="form-group">
-								<i class="fa fa-paragraph"><label>Recipe Description</label></i>
+								<i class="fa fa-paragraph"><label class="col-sm-2 col-form-label">Recipe Description</label></i>
                                 <div class="row">
                                     <textarea class="col-xs-12 col-md-6" id="recipe_description" name="recipe_description" type="text" autocomplete="off" placeholder="Describe your recipe here..."></textarea>
                                 </div>
 							</div>
-						</div>
-                        <div class="col-xs-12 col-md-2">
-                            <div class="form-group">
-							    <i class="fa fa-pencil"><label for="icon_prefix">Author</label></i>
+					</div>
+                    <div class="col-xs-12 col-md-2">
+                        <div class="form-group">
+							    <i class="fa fa-pencil"><label class="col-sm-2 col-form-label" for="icon_prefix">Author</label></i>
                                 <div class="row">
                                     <input id="author" name="author" type="text">	
                                 </div>							    				
-						    </div>
-                        </div>
-                        
+						</div>
+                    </div>                        
 				</div>
-                <div class="row">
-                    <div class="col-xs-12">             						
-						<div class="input-field col-xs-12 col-sm-6 col-md-6">
-							<i class="fa fa-spoon"><label for="icon_prefix">Equipment Needed</label></i>
-                            <div class="row">
-                                <input id="equipment_needed" class="col-xs-12" name="equipment_needed" type="text" placeholder="Example - weighing scales, whisk, loaf tin, mixing bowl" autocomplete="off">
+                <!--Second Row-->
+                <div class="row justify-content-md-center">
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <div class="form-group">
+                            <i class="fa fa-spoon"><label class="col-sm-6 col-form-label" for="icon_prefix">Equipment</label></i>             						
+						    <div class="input-field col-xs-12">
+							    <div class="row">
+                                    <textarea class="form-control col-xs-10" id="equipment_needed" rows="3" name="equipment_needed" type="text" placeholder="Example - weighing scales, whisk, loaf tin, mixing bowl" autocomplete="off"></textarea>
+                                </div>
                             </div>
                         </div>
-							<!--Ingredients-->
-						<div class="input-field col-xs-12 col-sm-6 col-md-6">
-							<i class="fa fa-shopping-basket"><label for="icon_prefix">Ingredients</label></i>
-                            <div class="row">
-                                <input name="ingredients" class="col-xs-12" rows="3" id="ingredients" placeholder="List ingredients here (including measurements). Example - 200g of plain flour">
-                            </div>									
-						</div>													
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-6 col-md-5 offset-md-2">
+						<!--Ingredients-->
+                        <div class="form-group">
+                            <i class="fa fa-shopping-basket"><label class="col-sm-2 col-form-label" for="icon_prefix">Ingredients</label></i>
+						    <div class="input-field col-xs-12">							
+                                <div class="row">
+                                    <textarea class="form-control col-xs-10" name="ingredients" rows="3" id="ingredients" placeholder="List ingredients here (including measurements). Example - 200g of plain flour"></textarea>
+                                </div>									
+						    </div>
+                        </div>													
 					</div>
-                </div> 							
+                </div>
+                <!--Method Row--> 							
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="row">
 								<div class="add-ingredient col-xs-12 col-md-12">									
 									<div class="col-xs-12 col-md-6">
 										<div class="input-field">
-											<i class="fa fa-wrench"><label for="icon_prefix">Method</label></i>
+											<i class="fa fa-wrench"><label class="col-sm-2 col-form-label" for="icon_prefix">Method</label></i>
 											<textarea class="form-control col-xs-12" id="method" name="method" type="text" placeholder="Explain method for baking your dessert here"></textarea>
 										</div>
 									</div>
@@ -65,7 +73,7 @@
                             <div class="row">
                                 <span class="dietary-info">
                                     <i class="fa fa-exclamation-triangle"></i>
-                                    <em>Dietary Information</em>
+                                    <label class="col-sm-2 col-form-label">Dietary Information</label>
                                 </span>
                             </div>
                             <div class="row">
@@ -92,7 +100,7 @@
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="input-field col s12 m12">
-									<i class="fa fa-photo"><label for="icon_prefix">Image URL</label></i>
+									<i class="fa fa-photo"><label class="col-sm-2 col-form-label" for="icon_prefix">Image URL</label></i>
 									<input id="img_url" name="img_url" type="text" placeholder="Paste url for image here">										
 								</div>
 							</div>
