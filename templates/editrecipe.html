@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3 align="center">Editing {{ recipe.recipe_name }}</h3>
-<div class="container-fluid">
-	<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col-xs-12">
-		<div class="row">
-			<div class="form col-xs-12">
-				<div class="row justify-content-md-center">
+<div class="container-fluid">	
+	<div class="row">
+		<div class="form col-xs-12">
+            <form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col-xs-12">
+				    <div class="row justify-content-md-center">
 					<div class="col-xs-12 col-md-4">
 						<div class="form-group">
 							<i class="fa fa-tag"><label class="col-sm-2 col-form-label" for="icon_prefix">Recipe Name</label></i>
 							<div class="row">
 								<input id="recipe_name" name="recipe_name" type="text" autocomplete="off" value="{{recipe.recipe_name}}">
-                            </div>
-							</div>
+                            </div>							
 						</div>
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group">
@@ -27,12 +26,12 @@
 								<i class="fa fa-pencil"><label class="col-sm-2 col-form-label" for="icon_prefix">Author</label></i>
 								<div class="row">
 									<input id="author" name="author" type="text" placeholder="{{recipe.author}}">
-                                </div>
-								</div>
+                                </div>								
 							</div>
-						</div>
+                        </div>
+					</div>
 						<!--Second Row-->
-						<div class="row justify-content-md-center">
+					<div class="row justify-content-md-center">
 							<div class="col-xs-12 col-sm-6 col-md-5">
 								<div class="form-group">
 									<i class="fa fa-spoon"><label class="col-sm-6 col-form-label" for="icon_prefix">Equipment</label></i>
@@ -55,7 +54,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+					</div>
 						<!--Method Row-->
 						<div class="row">
 							<div class="col-xs-12">
@@ -117,8 +116,7 @@
 										<div class="input-field col s12 m12">
 											<i class="fa fa-photo"><label class="col-sm-2 col-form-label" for="icon_prefix">Image URL</label></i>
 											<input id="img_url" name="img_url" type="text" placeholder="{{recipe.image_url}}">
-								</div>
-										</div>
+								        </div>										
 									</div>
 									<div class="row">
 										<div class="col-xs-6">
@@ -138,125 +136,11 @@
 								</div>
 							</div>
 						</div>
-					</div>
-	</form>
+				    </div>
+            </form>
+        </div>
+    </div>	
+</div>
 
-	<!--
-    <div class="row">
-		<div class="form-left col-md-6">
-			<div class="row">
-				<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col s12">
-					<div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-							    <i class="fa fa-tag"><label for="icon_prefix">Recipe Name</label></i>
-                                <div class="row">
-                                    <input id="recipe_name" name="recipe_name" type="text" autocomplete="off" class="validate form-control form-control-lg" value="{{recipe.recipe_name}}">
-                                </div>							
-						    </div>   
-                        </div>                     
-					</div>
-                    <div class="col-xs-12 col-md-6">
-						<div class="form-group">
-							<i class="fa fa-paragraph"><label>Recipe Description</label></i>
-                            <div class="row">
-                                <textarea class="col-xs-12 col-md-6" id="recipe_description" name="recipe_description" type="text" autocomplete="off">{{recipe.recipe_description}}</textarea>
-                            </div>
-						</div>
-					</div>
-										
-					<div class="row">
-						<span><em>Dietary Information</em></span>
-						<br>
-                        <br>
-						<div class="switch form-check form-check-inline">
-							<label>
-                                {% if recipe.contains_nuts %}
-                                    <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox" checked>
-                                {% else %}
-                                    <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox">
-                                {% endif %}
-                                <span class="lever"></span>
-                                Nuts?
-                            </label>
-						</div>
-						<div class="switch form-check form-check-inline">
-							<label>
-                                {% if recipe.gluten_free %}
-                                    <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox" checked>
-                                {% else %}
-                                    <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox">
-                                {% endif %}
-                                 <span class="lever"></span>
-                                Gluten?
-                           </label>
-						</div>
-						<div class="switch form-check form-check-inline">
-							<label>
-                                {% if recipe.vegan_friendly %}
-                                    <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox" checked>
-                                {% else %}
-                                    <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox">
-                                {% endif %}
-                                <span class="lever"></span>
-                                Vegan-friendly?
-                            </label>
-						</div>						
-					</div>
-                    
-                    <div class="row">
-                        <div class="col s6">
-			                <a href="{{ url_for('delete_recipe', dessert_id=recipe._id) }}" class="btn waves-effect waves-light deep-orange darken-4"><i class="fa fa-trash-o"></i>Delete Recipe</a> 
-                        </div>
-                    </div>
-				</form>
-			</div>
-		</div>
-		<div class="form-right col-md-6">
-			<div class="row">
-				<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}} " method="POST" class="col s12">
-                    <div class="row">
-                    <div class="input-field col-xs-12 col-md-6">
-							<i class="fa fa-spoon"><label for="icon_prefix">Equipment Needed</label></i>
-                            <div class="row">
-                                <input id="equipment_needed" class="col-xs-12" name="equipment_needed" type="text" value="{{recipe.equipment_needed}}" autocomplete="off">
-                            </div>
-                        </div>						
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">list</i>
-							<textarea name="ingredients" id="ingredients" class="materialize-textarea">{{recipe.ingredients}}</textarea>
-							<label for="icon_telephone">Ingredients</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">timer</i>
-							<textarea id="method" name="method" type="text" class="materialize-textarea">{{recipe.method}}</textarea>
-							<label for="icon_prefix">Method</label>
-						</div>
-					</div>
-					
-						<div class="input-field col s12">
-							<i class="material-icons prefix">poll</i>
-							<select id="uom" name="unit_of_measurement">
-                                <option value="" disabled selected>Choose your unit of measurement</option>
-                                {% for uom in units_of_measurement %}
-                                <option value="{{uom.uom_name}}">{{uom.uom_name}}</option>
-                                {% endfor %}
-                            </select>
-							<label>Unit of Measurement</label>
-						</div>
-					</div>
-					<br>
-                    <button class="btn waves-effect waves-light green darken-1" type="submit">Submit Edits
-                            <i class="material-icons right">send</i>
-                    </button>
-                </form>
-			</div>
-		</div>-->
-</div>
-</div>
 
 {% endblock %}

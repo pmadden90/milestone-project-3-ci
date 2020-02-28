@@ -50,7 +50,7 @@ def edit_recipe(dessert_id):
     return render_template('editrecipe.html', recipe=the_recipe)
 
 @app.route('/recipe/<dessert_id>/update', methods=["POST"])
-def update_recipe(dessert_id):    
+def update_recipe(dessert_id):
     desserts = mongo.db.desserts
     recipe_edit = {
         'recipe_name':request.form.get['recipe_name'],
