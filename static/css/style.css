@@ -146,6 +146,12 @@ h1 {
 .full-width {
     width: 100vw;
 }
+/*Equipment Page*/
+.equipment-img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 /*Media Queries*/
 /* Large desktop */
