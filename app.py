@@ -53,14 +53,14 @@ def edit_recipe(dessert_id):
 def update_recipe(dessert_id):
     desserts = mongo.db.desserts
     recipe_edit = {
-        'recipe_name':request.form.get['recipe_name'],
-        'recipe_description':request.form.get['recipe_description'],
-        'ingredients':request.form.get['ingredients'],
-        'equipment_needed':request.form.get['equipment_needed'],
-        'method':request.form.get['method'],
-        'gluten_free':request.form.get['gluten_free'],
-        'contains_nuts':request.form.get['contains_nuts'],
-        'vegan_friendly':request.form.get['vegan_friendly']
+        'recipe_name':request.form.get('recipe_name'),
+        'recipe_description':request.form.get('recipe_description'),
+        'ingredients':request.form.get('ingredients'),
+        'equipment_needed':request.form.get('equipment_needed'),
+        # 'method':request.form.get['method'],
+        'gluten_free':request.form.get('gluten_free'),
+        'contains_nuts':request.form.get('contains_nuts'),
+        'vegan_friendly':request.form.get('vegan_friendly')
     }
     desserts.update_one({"_id": ObjectId(dessert_id)}, recipe_edit),  
     return redirect(url_for('get_recipes'))

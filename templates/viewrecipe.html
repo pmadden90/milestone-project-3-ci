@@ -75,11 +75,31 @@
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
       <div class="card-body">
             <div class="col-xs-12 col-md-4">
-				<span>Contains Nuts</span> - {{recipe.contains_nuts}}</div>
+				<span>
+                    {% if recipe.contains_nuts %}
+                        <p>Contains nuts</p>
+                    {% else %}
+                        <p>Nut free</p>
+                    {% endif %}
+				</span>
+            </div>
 			<div class="col-xs-12 col-md-4">
-				<span>Gluten Free</span> - {{recipe.gluten_free}}</div>
+				<span>
+                {% if recipe.gluten_free %}
+                    <p>Gluten free</p>
+                {% else %}
+                    <p>Contains gluten</p>
+                {% endif %}
+                </span>
+            </div>
 			<div class="col-xs-12 col-md-4">
-				<span>Vegan Friendly</span> - {{recipe.vegan_friendly}}</div>
+				<span>
+                {% if recipe.vegan_friendly %}
+                    <p>Suitable for vegans</p>
+                {% else %}
+                    <p>Not suitable for vegans</p>
+                {% endif %}
+                </span>            
             </div>
       </div>
     </div>
