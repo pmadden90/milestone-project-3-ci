@@ -177,6 +177,14 @@ h1 {
     background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
     }
 
+    .fa {
+    font-size: 1em;
+    }
+
+    .fa label {
+    font-family: Molle;
+    font-size: 1em;
+    }
 }
 
 
