@@ -173,17 +173,30 @@ h1 {
 /* Landscape phones and down */
 
 @media (max-width: 480px) {
+    
+
     masthead-image {
-    background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
+        background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
     }
 
     .fa {
-    font-size: 1em;
+        font-size: 1em;
     }
 
     .fa label {
-    font-family: Molle;
-    font-size: 1em;
+        font-family: Molle;
+        font-size: 1em;
+    }
+
+    .container {
+        padding-right: 5px;
+        padding-left: 0px;
+        margin-right: 5px;
+        margin-left: -8px;      
+    }
+
+    .btn-link {
+        font-size: .75em;
     }
 }
 
@@ -191,8 +204,28 @@ h1 {
 /* Smaller Phones */
 
 @media (min-width: 250px) and (max-width: 321px) {
-
-
     
+    masthead-image {
+        background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
+    }
 
+    .fa {
+        font-size: 1em;
+    }
+
+    .fa label {
+        font-family: Molle;
+        font-size: 1em;
+    }    
+
+    .container {
+        padding-right: 5px;
+        padding-left: 0px;
+        margin-right: 5px;
+        margin-left: -8px;      
+    }
+
+    .btn-link {
+        font-size: .75em;
+    }
 }
