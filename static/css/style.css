@@ -152,6 +152,12 @@ h1 {
     height: auto;
 }
 
+.equipment-header {
+    font-size: 3.5em !important;
+    color: #2A1911 !important;
+    font-family: Molle;
+}
+
 
 /*Media Queries*/
 /* Large desktop */
@@ -179,9 +185,7 @@ h1 {
 /* Landscape phones and down */
 
 @media (max-width: 480px) {
-    
-
-    masthead-image {
+    .masthead-image {
         background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
     }
 
@@ -204,6 +208,10 @@ h1 {
     .btn-link {
         font-size: .75em;
     }
+
+    .equipment-header {
+        font-size: 3em !important;    
+    }
 }
 
 
@@ -211,7 +219,7 @@ h1 {
 
 @media (min-width: 250px) and (max-width: 321px) {
     
-    masthead-image {
+    .masthead-image {
         background-image: url('../img/chocolate-homepage-phone.jpg') !important;   
     }
 
@@ -233,5 +241,9 @@ h1 {
 
     .btn-link {
         font-size: .75em;
+    }
+
+    .equipment-header {
+        font-size: 3em !important;    
     }
 }
