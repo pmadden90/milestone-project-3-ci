@@ -7,8 +7,16 @@ Users can add their own recipes (and then edit or delete them) or read other use
  
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+####As a user, I want to browse and search for dessert recipes.
+
+####As a user, I would like to see potential allergens in the recipes.
+
+####As a registered user, I would like to submit my own recipes for others to see
+
+####As a registered user, I would like to be able to edit my recipes and delete if necessary
+
+####As a user, I would like to be able to find equipment I might want to purchase related to the recipes
+
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 
@@ -35,8 +43,6 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
-- [Materialize] (https://materializecss.com/)
-    - The project uses **Materialize** for styling and layout.
 - [Bootstrap]  (https://getbootstrap.com/)
     - The project uses **Bootstrap** for styling and layout.
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
@@ -45,6 +51,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
     - The project uses **MongoDB** for creating, reading, updating and deleting data from a database.
 - [Heroku]  (https://Heroku.com/)
     - The project uses **Heroku** for deploying and hosting the app.
+- [Python] (https://python.org)
 
 
 ## Testing
@@ -85,7 +92,7 @@ In addition, if it is not obvious, you should also describe how to run your code
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
-- The photos used in this site were obtained from ...
+- The photos used in this site were obtained from pexels.com
 
 ### Acknowledgements
 
