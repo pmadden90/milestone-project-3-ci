@@ -87,6 +87,7 @@ In addition, if it is not obvious, you should also describe how to run your code
 
 
 ## Credits
+The login form was sourced from Bootsnipp - https://bootsnipp.com/snippets/vl4R7
 
 ### Content
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)

@@ -34,7 +34,7 @@ def homepage_index():
     ###        {"$sample": {"size": 8}}])])
     ###return render_template("index.html", carousel=carousel)
 
-@app.route('/login', methods = ["POST", "GET"])
+@app.route('/user/login', methods = ["POST", "GET"])
 def login(): 
     if request.method == "POST":
         user = request.form["nm"]
@@ -42,6 +42,10 @@ def login():
         return redirect(url_for("user"))
     else:
         return render_template('login.html')
+
+@app.route('/user/signup', methods=["POST"])
+def signup():
+    return render_template('signup.html')
 
 @app.route('/recipes')
 def get_recipes():
