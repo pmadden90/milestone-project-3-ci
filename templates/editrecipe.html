@@ -3,6 +3,7 @@
 <h3 align="center">Editing {{ recipe.recipe_name }}</h3>
 <div class="container-fluid">
 	<div class="row">
+    {% if session.user %}
 		<div class="form col-xs-12">
 			<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col-xs-12">
 				<div class="row justify-content-md-center">
@@ -139,6 +140,7 @@
 							</div>
 			</form>
 		</div>
+    {% endif %}
 	</div>
 </div>
 

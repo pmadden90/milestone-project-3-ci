@@ -28,7 +28,20 @@ mongo = PyMongo(app)
 @app.route('/homepage_index')
 def homepage_index():    
     return render_template("index.html", recipes=mongo.db.desserts.find()) 
-    # .aggregate([{$sample: {size: 5}}]);
+    
+    ###carousel = (
+    ###    [recipe for recipe in recipes_collection.aggregate([
+    ###        {"$sample": {"size": 8}}])])
+    ###return render_template("index.html", carousel=carousel)
+
+@app.route('/login', methods = ["POST", "GET"])
+def login(): 
+    if request.method == "POST":
+        user = request.form["nm"]
+        session["user"] = user
+        return redirect(url_for("user"))
+    else:
+        return render_template('login.html')
 
 @app.route('/recipes')
 def get_recipes():
