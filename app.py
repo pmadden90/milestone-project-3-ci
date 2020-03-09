@@ -43,6 +43,13 @@ def login():
     else:
         return render_template('login.html')
 
+@app.route('/user')
+def user():
+    if "user" in session:
+        user = session["user"]
+        return f"<h1>{{user}}</h1>"
+    
+
 @app.route('/user/signup', methods=["POST"])
 def signup():
     return render_template('signup.html')
