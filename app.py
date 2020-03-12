@@ -10,6 +10,7 @@ if path.exists("env.py"):
 app = Flask(__name__)
 
 
+
 # -------------------- #
 #    DB Collections    #
 # -------------------- #
