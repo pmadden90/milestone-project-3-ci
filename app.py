@@ -25,7 +25,10 @@ mongo = PyMongo(app)
 ###RECIPES
 @app.route('/')
 @app.route('/homepage_index')
-def homepage_index():    
+def homepage_index():
+    if 'username' in session:
+        return 'You are logged in as ' + session['username']
+
     return render_template("index.html", recipes=mongo.db.desserts.find()) 
     
     carousel = (
@@ -34,7 +37,9 @@ def homepage_index():
     return render_template("index.html", carousel=carousel)
 
 @app.route('/user/login', methods = ["POST", "GET"])
-def login(): 
+def login():
+    users = mongo.db.users
+    login_user = users.find_one({'name': request.form['username']}) 
     if request.method == "POST":
         user = request.form["nm"]
         session["user"] = user
@@ -127,4 +132,3 @@ def dropdown_uom():
 
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
-    
