@@ -28,20 +28,20 @@ mongo = PyMongo(app)
 def homepage_index():    
     return render_template("index.html", recipes=mongo.db.desserts.find()) 
     
-    ###carousel = (
-    ###    [recipe for recipe in recipes_collection.aggregate([
-    ###        {"$sample": {"size": 8}}])])
-    ###return render_template("index.html", carousel=carousel)
+    carousel = (
+       [recipe for recipe in recipes_collection.aggregate([
+           {"$sample": {"size": 8}}])])
+    return render_template("index.html", carousel=carousel)
 
 @app.route('/user/login', methods = ["POST", "GET"])
 def login(): 
-    ###if request.method == "POST":
-        ###user = request.form["nm"]
-        ###session["user"] = user
-        ###return redirect(url_for("user"))
-    ###else:
-        ###if 'user' in session
-           ### return redirect (url_for('user'))
+    if request.method == "POST":
+        user = request.form["nm"]
+        session["user"] = user
+        return redirect(url_for("user"))
+    else:
+        if 'user' in session:
+            return redirect (url_for('user'))
 
     return render_template('login.html')
 
@@ -113,11 +113,6 @@ def delete_recipe(dessert_id):
 def get_equipment():
     return render_template('equipment.html', equipment=mongo.db.equipment.find())
 
-if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'), 
-        port=int(os.environ.get('PORT', 5000)),
-        debug=True)
-
 # -------------------- #
 #   Other Functions    #
 # -------------------- #
@@ -129,3 +124,7 @@ def dropdown_uom():
 
 
     # import pdb; pdb.set_trace()
+
+if __name__ == '__main__':
+    app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+    
