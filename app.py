@@ -26,9 +26,8 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/homepage_index')
 def homepage_index():
-    if 'username' in session:
-        return 'You are logged in as ' + session['username']
-
+    ###if 'username' in session:
+       ### return 'You are logged in as ' + session['username']
     return render_template("index.html", recipes=mongo.db.desserts.find()) 
     
     carousel = (
