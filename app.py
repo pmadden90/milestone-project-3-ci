@@ -32,8 +32,14 @@ def homepage_index():
     
     carousel = (
        [recipe for recipe in recipes_collection.aggregate([
-           {"$sample": {"size": 8}}])])
+           {"$sample": {"size": 4}}])])
     return render_template("index.html", carousel=carousel)
+
+
+@app.route('/user/login/page')
+def login_page():
+    users = mongo.db.users
+    return render_template("login.html")
 
 @app.route('/user/login', methods = ["POST", "GET"])
 def login():
