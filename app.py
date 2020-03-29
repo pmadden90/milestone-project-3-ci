@@ -16,6 +16,7 @@ MONGODB_URI = os.environ.get("MONGO_PM_MONGO")
 DBS_NAME = "recipes_db"
 COLLECTION_NAME = "desserts"
 app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
+app.secret_key = os.getenv("SECRET_KEY")
 
 mongo = PyMongo(app)
 
@@ -26,9 +27,12 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/homepage_index')
 def homepage_index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return render_template("index.html", recipes=mongo.db.desserts.find()) 
     ###if 'username' in session:
        ### return 'You are logged in as ' + session['username']
-    return render_template("index.html", recipes=mongo.db.desserts.find()) 
+    ###return render_template("index.html", recipes=mongo.db.desserts.find()) 
     
     carousel = (
        [recipe for recipe in recipes_collection.aggregate([
@@ -39,7 +43,7 @@ def homepage_index():
 @app.route('/user/login/page')
 def login_page():
     users = mongo.db.users
-    return render_template("login.html")
+    return render_template('login.html')
 
 @app.route('/user/login', methods = ["POST", "GET"])
 def login():
