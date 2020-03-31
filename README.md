@@ -36,6 +36,7 @@ In addition, you may also use this section to discuss plans for additional featu
 - Initially, I attempted to set up a virtualenv as per suggestion of mentor however after discussing with a tutor via webchat, I discovered that a virtualenv is more difficult to set up on Gitpod 
 so this was abandoned. 
 - A rating system - up to 5 stars.
+- I spent some time trying to implement a login function but it caused me delays and issues so decided to press on without it
 
 ## Technologies Used
 
