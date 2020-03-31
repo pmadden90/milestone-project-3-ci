@@ -25,11 +25,10 @@ mongo = PyMongo(app)
 # -------------------- #
 ###RECIPES
 @app.route('/')
-@app.route('/homepage_index')
-def homepage_index():    
+def homepage_index():
     return render_template("index.html", recipes=mongo.db.desserts.aggregate(
-   [ { '$sample': { 'size': 3 } } ]
-))
+        [{'$sample': {'size': 3 }}]
+        ))
 
 ###@app.route('/user/login/page')
 ###def login_page():
