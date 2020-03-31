@@ -27,8 +27,8 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/homepage_index')
 def homepage_index():
-    if 'username' in session:
-        return 'Logged in as %s' % escape(session['username'])
+    ###if 'username' in session:
+        ###return 'Logged in as %s' % escape(session['username'])
     return render_template("index.html", recipes=mongo.db.desserts.find()) 
     ###if 'username' in session:
        ### return 'You are logged in as ' + session['username']
