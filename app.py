@@ -26,53 +26,44 @@ mongo = PyMongo(app)
 ###RECIPES
 @app.route('/')
 @app.route('/homepage_index')
-def homepage_index():
-    ###if 'username' in session:
-        ###return 'Logged in as %s' % escape(session['username'])
-    return render_template("index.html", recipes=mongo.db.desserts.find()) 
-    ###if 'username' in session:
-       ### return 'You are logged in as ' + session['username']
-    ###return render_template("index.html", recipes=mongo.db.desserts.find()) 
-    
-    carousel = (
-       [recipe for recipe in recipes_collection.aggregate([
-           {"$sample": {"size": 4}}])])
-    return render_template("index.html", carousel=carousel)
+def homepage_index():    
+    return render_template("index.html", recipes=mongo.db.desserts.aggregate(
+   [ { '$sample': { 'size': 3 } } ]
+))
 
+###@app.route('/user/login/page')
+###def login_page():
+    ###users = mongo.db.users
+    ###return render_template('login.html')
 
-@app.route('/user/login/page')
-def login_page():
-    users = mongo.db.users
-    return render_template('login.html')
+###@app.route('/user/login', methods = ["POST", "GET"])
+###def login():
+    ###users = mongo.db.users
+    ###login_user = users.find_one({'name': request.form['username']}) 
+    ###if request.method == "POST":
+        ###user = request.form["nm"]
+        ###session["user"] = user
+        ###return redirect(url_for("user"))
+    ###else:
+        ###if 'user' in session:
+            ###return redirect (url_for('user'))
 
-@app.route('/user/login', methods = ["POST", "GET"])
-def login():
-    users = mongo.db.users
-    login_user = users.find_one({'name': request.form['username']}) 
-    if request.method == "POST":
-        user = request.form["nm"]
-        session["user"] = user
-        return redirect(url_for("user"))
-    else:
-        if 'user' in session:
-            return redirect (url_for('user'))
+    ###return render_template('login.html')
 
-    return render_template('login.html')
+###@app.route('/user')
+###def user():
+    ###if "user" in session:
+        ###user = session["user"]
+        ###return f"<h1>{{user}}</h1>"
 
-@app.route('/user')
-def user():
-    if "user" in session:
-        user = session["user"]
-        return f"<h1>{{user}}</h1>"
+###@app.route('/user/logout')
+###def logout():
+    ###session.pop("user", None)
+    ###return redirect(url_for('login'))  
 
-@app.route('/user/logout')
-def logout():
-    session.pop("user", None)
-    return redirect(url_for('login'))  
-
-@app.route('/user/signup', methods=["POST"])
-def signup():
-    return render_template('signup.html')
+###@app.route('/user/signup', methods=["POST"])
+###def signup():
+    ###return render_template('signup.html')
 
 @app.route('/recipes')
 def get_recipes():
@@ -130,6 +121,9 @@ def get_equipment():
 # -------------------- #
 #   Other Functions    #
 # -------------------- #
+###Pagination
+
+
 ###Dropdown
 def dropdown_uom():
     return [
