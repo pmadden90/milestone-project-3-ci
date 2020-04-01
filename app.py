@@ -96,7 +96,7 @@ def update_recipe(dessert_id):
         'contains_nuts':request.form.get('contains_nuts'),
         'vegan_friendly':request.form.get('vegan_friendly')
     }
-    desserts.update_one({"_id": ObjectId(dessert_id)}, recipe_edit),  
+    desserts.update({"_id": ObjectId(dessert_id)}, recipe_edit),  
     return redirect(url_for('get_recipes'))
 
 @app.route('/recipe/insert', methods=['POST'])
