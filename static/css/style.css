@@ -158,7 +158,7 @@ h1 {
     color: #2A1911 !important;
     font-family: Molle;
 }
-/*Pagination Settings*/
+/*Pagination Settings - copied from https://pythonhosted.org/Flask-paginate/*/
 .pagination-page-info {
     padding: .6em;
     padding-left: 0;

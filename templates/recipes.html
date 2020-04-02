@@ -22,6 +22,26 @@
 			</div>
 		</div>
         {% endfor %}
+        {{ pagination.info }}
+{{ pagination.links }}
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dessert in recipes %}
+      <tr>
+        <td>{{ loop.index + pagination.skip }}</td>
+        <td>{{ recipe.recipe_name }}</td>        
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{{ pagination.links }}
 	</div>
 </div>
 
