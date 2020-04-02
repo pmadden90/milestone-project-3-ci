@@ -98,6 +98,7 @@ h1 {
 
 .dietary-info {
     margin-left: 3em;
+    font-family: Molle;
 }
 
 
@@ -177,7 +178,6 @@ h1 {
 /* Large desktop */
 
 @media (min-width: 1200px) {
-
     
 }
 
@@ -186,7 +186,6 @@ h1 {
 
 @media (min-width: 768px) and (max-width: 1199px) {
     
-
 }
 
 
