@@ -5,139 +5,129 @@
 	<div class="row">
 		<div class="form col-xs-12">
 			<form action="{{ url_for('update_recipe', dessert_id=recipe._id)}}" method="POST" class="col-xs-12">
-				<div class="row justify-content-md-center">
-					<div class="col-xs-12 col-md-4">
-						<div class="form-group">
-							<i class="fa fa-tag"><label class="col-sm-2 col-form-label" for="icon_prefix">Recipe Name</label></i>
-							<div class="row">
-								<input id="recipe_name" name="recipe_name" type="text" autocomplete="off" value="{{recipe.recipe_name}}">
-                            </div>
-						</div>
-                    </div>
-					<div class="col-xs-12 col-md-6">
-						<div class="form-group">
-						    <i class="fa fa-paragraph"><label class="col-sm-2 col-form-label">Recipe Description</label></i>
-							<div class="row">
-								<textarea class="col-xs-12 col-md-6" id="recipe_description" name="recipe_description" type="text" autocomplete="off">{{recipe.recipe_description}}</textarea>
-							</div>
+				<div class='container-fluid'>
+			        <div class='row'>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray'>
+					<div class="form-group">
+						<i class="fa fa-tag"><label class="col-sm-2 col-form-label" for="icon_prefix">Recipe Name</label></i>
+						<div class="row">
+							<input id="recipe_name" name="recipe_name" type="text" autocomplete="off" value="{{recipe.recipe_name}}">
+                        </div>
+					</div>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray-l'>
+					<div class="form-group">
+						<i class="fa fa-paragraph"><label class="col-sm-2 col-form-label">Recipe Description</label></i>
+						<div class="row">
+							<textarea class="col-xs-12 col-md-6" id="recipe_description" name="recipe_description" type="text" autocomplete="off">{{recipe.recipe_description}}</textarea>
 						</div>
 					</div>
-					<div class="col-xs-12 col-md-2">
-						<div class="form-group">
-							<i class="fa fa-pencil"><label class="col-sm-2 col-form-label" for="icon_prefix">Author</label></i>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray'>
+					<div class="form-group">
+						<i class="fa fa-pencil"><label class="col-sm-2 col-form-label" for="icon_prefix">Author</label></i>
+						<div class="row">
+							<input id="author" name="author" type="text" placeholder="{{recipe.author}}" readonly>
+                        </div>
+					</div>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray-l'>
+					<div class="form-group">
+						<i class="fa fa-spoon"><label class="col-sm-6 col-form-label" for="icon_prefix">Equipment</label></i>
+						<div class="input-field col-xs-12">
 							<div class="row">
-								<input id="author" name="author" type="text" placeholder="{{recipe.author}}">
-                            </div>
-						</div>
-					</div>
-                </div>
-				<!--Second Row-->
-				<div class="row justify-content-md-center">
-					<div class="col-xs-12 col-sm-6 col-md-5">
-						<div class="form-group">
-				    		<i class="fa fa-spoon"><label class="col-sm-6 col-form-label" for="icon_prefix">Equipment</label></i>
-							<div class="input-field col-xs-12">
-								<div class="row">
-									<textarea class="form-control col-xs-10" id="equipment_needed" rows="3" name="equipment_needed" type="text" autocomplete="off">{{recipe.equipment_needed}}</textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-6 col-md-5 offset-md-2">
-					<!--Ingredients-->
-					    <div class="form-group">
-						    <i class="fa fa-shopping-basket"><label class="col-sm-2 col-form-label" for="icon_prefix">Ingredients</label></i>
-							<div class="input-field col-xs-12">
-								<div class="row">
-									<textarea class="form-control col-xs-10" name="ingredients" rows="3" id="ingredients">{{recipe.ingredients}}</textarea>
-								</div>
+								<textarea class="form-control col-xs-10" id="equipment_needed" rows="3" name="equipment_needed" type="text" autocomplete="off">{{recipe.equipment_needed}}</textarea>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--Method Row-->
-				<div class="row">
-					<div class="col-xs-12">
-				    	<div class="row">
-							<div class="add-ingredient col-xs-12 col-md-12">
-								<div class="col-xs-12 col-md-6">
-									<div class="input-field">
-									<i class="fa fa-wrench"><label class="col-sm-2 col-form-label" for="icon_prefix">Method</label></i>
-									<textarea class="form-control col-xs-12" id="method" name="method" type="text">{{recipe.method}}</textarea>
-									</div>
-								</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray'>
+					<div class="form-group">
+						<i class="fa fa-shopping-basket"><label class="col-sm-2 col-form-label" for="icon_prefix">Ingredients</label></i>
+						<div class="input-field col-xs-12">
+							<div class="row">
+								<textarea class="form-control col-xs-10" name="ingredients" rows="3" id="ingredients">{{recipe.ingredients}}</textarea>
 							</div>
 						</div>
-						<div class="row">
-							<div class="row">
-								<span class="dietary-info">
-                                <i class="fa fa-exclamation-triangle"></i>
-                                <label class="col-sm-2 col-form-label">Dietary Information</label>
-                                </span>
-							</div>
-							<div class="row">
-								<div class="switch form-check form-check-inline">
-					    			<label>
+					</div>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray-l'>
+					<div class="form-group">
+						<div class="input-field">
+							<i class="fa fa-wrench"><label class="col-sm-2 col-form-label" for="icon_prefix">Method</label></i>
+							<textarea class="form-control col-xs-12" id="method" name="method" rows="3" type="text">{{recipe.method}}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray'>
+					<div class="row">
+						<span class="dietary-info">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <label class="col-sm-2 col-form-label">Dietary Information</label>
+                        </span>
+					</div>
+					<div class="row">
+						<div class="switch form-check form-check-inline">
+					    	<label>
                                 {% if recipe.contains_nuts %}
-                                    <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox" checked>
+                                <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox" checked>
                                 {% else %}
-                                    <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox">
+                                <input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox">
                                 {% endif %}
-                                    <span class="lever"></span>
+                                <span class="lever"></span>
                                 Nuts?
-                                    </label>
-								</div>
-								<div class="switch form-check form-check-inline">
-									<label>
+                            </label>
+						</div>
+						<div class="switch form-check form-check-inline">
+							<label>
                                 {% if recipe.gluten_free %}
-                                    <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox" checked>
+                                <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox" checked>
                                 {% else %}
-                                    <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox">
+                                <input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox">
                                 {% endif %}
-                                    <span class="lever"></span>
+                                <span class="lever"></span>
                                 Gluten?
-                                    </label>
-								</div>
-								<div class="switch form-check form-check-inline">
-									<label>
+                            </label>
+						</div>
+						<div class="switch form-check form-check-inline">
+							<label>
                                 {% if recipe.vegan_friendly %}
-                                    <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox" checked>
+                                <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox" checked>
                                 {% else %}
-                                    <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox">
+                                <input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox">
                                 {% endif %}
                                 <span class="lever"></span>
                                 Vegan-friendly?
-                                    </label>
-								</div>
-							</div>
+                            </label>
 						</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-6">
-											<div class="input-field col s12 m12">
-												<i class="fa fa-photo"><label class="col-sm-2 col-form-label" for="icon_prefix">Image URL</label></i>
-												<input id="img_url" name="img_url" type="text" placeholder="{{recipe.img_url}}">
-								        </div>
-											</div>
-											<div class="row">
-												<div class="col-xs-6">
-													<i class="fa fa-check-circle"></i>
-													<button class="btn-success" type="button submit">Submit Edits</button>
-												</div>
-												<div class="col-xs-6">
-													<i class="fa fa-trash-o"></i>
-													<button type="button" class="btn btn-danger">
-                                                <a href="{{ url_for('delete_recipe', dessert_id=recipe._id) }}"
-														class="btn waves-effect waves-light deep-orange darken-4">Delete
-														Recipe</a>
-                                            </button>
-
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+                    </div>
+				</div>						
+				<div class='col-xs-12 col-md-4 col-sm-2 gray-l'>
+					<div class="form-group">
+						<div class="input-field col s12 m12">
+							<i class="fa fa-photo"><label class="col-sm-2 col-form-label" for="icon_prefix">Image URL</label></i>
+							<input id="img_url" name="img_url" type="text" placeholder="Paste url for image here">
+				        </div>
+					</div>
+				</div>
+				<div class='col-xs-12 col-md-4 col-sm-2 gray'>
+					<div class="row submit-recipe-button">
+						<div class="col-xs-6">
+							<i class="fa fa-check-circle"></i>
+							<button class="btn-success" type="button submit">Submit Edits</button>
+						</div>
+						<div class="col-xs-6">
+							<i class="fa fa-trash-o"></i>
+							<button type="button" class="btn btn-danger">
+                                <a href="{{ url_for('delete_recipe', dessert_id=recipe._id) }}"
+								class="btn waves-effect waves-light deep-orange darken-4">Delete
+								Recipe</a>
+                            </button>
+						</div>
+					</div>
+				</div>
+			        </div>
+		        </div>
 			</form>
 		</div>		
 	</div>
