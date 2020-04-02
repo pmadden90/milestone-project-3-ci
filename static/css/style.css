@@ -178,14 +178,24 @@ h1 {
 /* Large desktop */
 
 @media (min-width: 1200px) {
-    
+    .submit-recipe-button {
+        position: absolute;
+        left: auto;
+        right: auto;
+        bottom: 5px;
+    }
 }
 
 
 /* Portrait tablet to landscape and desktop */
 
 @media (min-width: 768px) and (max-width: 1199px) {
-    
+    .submit-recipe-button {
+        position: absolute;
+        left: auto;
+        right: auto;
+        bottom: 5px;
+    }
 }
 
 
