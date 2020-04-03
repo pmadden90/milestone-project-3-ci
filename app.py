@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from flask_bootstrap import Bootstrap
-from flask_paginate import Pagination, get_page_parameter
+###from flask_paginate import Pagination, get_page_parameter
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -67,7 +67,7 @@ def homepage_index():
 
 @app.route('/recipes')
 def get_recipes():
-    return render_template("recipes.html", recipes=mongo.db.desserts.find().skip(NUMBER_OF_ITEMS * (PAGE_NUMBER - 1)).limit(NUMBER_OF_ITEMS ))
+    return render_template("recipes.html", recipes=mongo.db.desserts.find().limit(6))
 
 @app.route('/recipes/new')
 def add_recipe():
