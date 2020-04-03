@@ -72,7 +72,7 @@ def get_recipes():
     dessert = mongo.db.desserts
 
     offset = int(request.args['offset'])
-    limit = 6
+    limit = int(request.args['limit'])
 
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
@@ -81,13 +81,15 @@ def get_recipes():
     output = []
 
     for i in desserts:
-        output.append({'recipe_name': i['recipe_name']})
+        output.append({'recipe_name': i['recipe_name'], 'recipe_description': i['recipe_description'],
+        'img_url': i['img_url'], 'author': i['author']})
 
     next_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
     prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
-    return render_template("recipes.html", recipes=mongo.db.desserts.find().limit(6))
+    #return render_template("recipes.html", recipes=mongo.db.desserts.find().limit(6))
+    return render_template("recipes.html", recipes=output)
 
 @app.route('/recipes/new')
 def add_recipe():
