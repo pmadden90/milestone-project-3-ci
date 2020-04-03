@@ -202,7 +202,10 @@ h1 {
 /* Landscape phone to portrait tablet */
 
 @media (max-width: 767px) {
-    
+    .equipment-img {
+        width: 99vw;
+        height: 40vh;
+    }
 }
 
 /* Landscape phones and down */
@@ -234,6 +237,11 @@ h1 {
 
     .equipment-header {
         font-size: 3em !important;    
+    }
+
+    .equipment-img {
+        width: 99vw;
+        height: 40vh;
     }
 }
 
@@ -268,5 +276,10 @@ h1 {
 
     .equipment-header {
         font-size: 3em !important;    
+    }
+
+    .equipment-img {
+        width: 99vw;
+        height: 40vh;
     }
 }
