@@ -158,21 +158,31 @@ h1 {
     color: #2A1911 !important;
     font-family: Molle;
 }
-/*Pagination Settings - copied from https://pythonhosted.org/Flask-paginate/*/
-.pagination-page-info {
-    padding: .6em;
-    padding-left: 0;
-    width: 40em;
-    margin: .5em;
-    margin-left: 0;
-    font-size: 12px;
+/*Pagination Settings - copied from https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_active_round*/
+.pagination {
+  display: inline-block;
 }
-.pagination-page-info b {
-    color: black;
-    background: #6aa6ed;
-    padding-left: 2px;
-    padding: .1em .25em;
-    font-size: 150%;
+
+.center {
+  text-align: center;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
 }
 /*Media Queries*/
 /* Large desktop */
