@@ -71,8 +71,8 @@ def get_recipes():
 
     dessert = mongo.db.desserts
 
-    offset = int(request.args['offset'])
-    limit = int(request.args['limit'])
+    offset = int(request.args.get('offset')) if request.args.get('offset') else 1
+    limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     #page = int(request.args.get('page', 2))
 
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
@@ -143,12 +143,12 @@ def get_equipment():
 
     shop = mongo.db.equipment
 
-    offset = int(request.args['offset'])
-    limit = int(request.args['limit'])
+    offset = int(request.args.get('offset')) if request.args.get('offset') else 1
+    limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     #page = int(request.args.get('page', 2))
 
-    starting_id = shop.find().sort('item_name', pymongo.ASCENDING)
-    last_id = starting_id[offset]['item_name']
+    starting_id = shop.find().sort('_id', pymongo.ASCENDING)
+    last_id = starting_id[offset]['_id']
 
     equipment = shop.find({'_id': {'$gte': last_id}}).sort('item_name', pymongo.ASCENDING).limit(limit)
     output = []
