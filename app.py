@@ -70,7 +70,14 @@ def homepage_index():
 def get_recipes():
 
     dessert = mongo.db.desserts
-
+    page, per_page, offset = get_page_items()
+    pagination = get_pagination(page=page,
+                            per_page=per_page,   #results per page
+                            total=total,         #total number of results 
+                            format_total=True,   #format total. example 1,024
+                            format_number=True,  #turn on format flag
+                            record_name='repositories', #provide context
+                            )         
     offset = int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     page = int(request.args.get('page', 2))
@@ -91,7 +98,8 @@ def get_recipes():
     pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
     
-    return render_template("recipes.html", recipes=output, pagination=pagination)
+    return render_template("recipes.html", recipes=output, pagination=pagination,page=page,
+        total=total, per_page=per_page)
 
 @app.route('/recipes/new')
 def add_recipe():
@@ -168,13 +176,37 @@ def get_equipment():
 # -------------------- #
 #   Other Functions    #
 # -------------------- #
-###Pagination
-
+###Pagination - copied from https://harishvc.com/2015/04/15/pagination-flask-mongodb/
+def get_css_framework():
+    return 'bootstrap4'
+def get_link_size():
+    return 'sm'  #option lg
+def show_single_page_or_not():
+    return False
+def get_page_items():
+    page = int(request.args.get('page', 1))
+    per_page = request.args.get('per_page')
+    if not per_page:
+        per_page = PER_PAGE
+    else:
+        per_page = int(per_page)
+    offset = (page - 1) * per_page
+    return page, per_page, offset
+def get_pagination(**kwargs):
+    kwargs.setdefault('record_name', 'repositories')
+    return Pagination(css_framework=get_css_framework(),
+                      link_size=get_link_size(),
+                      show_single_page=show_single_page_or_not(),
+                      **kwargs
+                      )
 
 ###Dropdown
 def dropdown_uom():
+
+    uom = mongo.db.unit_of_measurement
+
     return [
-        item for measurement in unit_of_measurement.find()
+        item for measurement in uom.find()
         for item in measurement.get("uom_name")]
 
 

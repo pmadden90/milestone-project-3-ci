@@ -28,6 +28,8 @@
         <!--Empty row to fix styling issue in which Bootstrap grid system was not displaying correctly-->
         </div>     
         {% endfor %}
+        {% if total > 1 %}              #Ignore pagination if you get no results
+        {{ pagination.info }}
         <div class="center">
             <div class="pagination">
                 <a href="#">&laquo;</a>
@@ -39,7 +41,10 @@
                 <a href="#">6</a>
                 <a href="#">&raquo;</a>
             </div>
-        </div>        
+        </div>  
+        {% endif %}     
+        {{ pagination.links }}
+              
 	</div>
 </div>
 
