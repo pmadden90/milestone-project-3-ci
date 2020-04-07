@@ -91,7 +91,7 @@ def get_recipes():
     pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
     
-    return render_template("recipes.html", recipes=output, pagination=pagination) #, 
+    return render_template("recipes.html", recipes=output, pagination=pagination)
 
 @app.route('/recipes/new')
 def add_recipe():

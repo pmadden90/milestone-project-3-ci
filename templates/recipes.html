@@ -3,24 +3,30 @@
 
 
 <div class="container full-width">
-	<div class="row">
+	<div class="row text-center">
         {% for dessert in recipes %}
-		<div class="col-xs-12 col-md-4 col-lg-4">
-			<div class="card" style="width: 14rem;">
-				<img src="{{dessert.img_url}}" class="card-img-top" alt="...">
-				<div class="card-body" style="height: 275px; margin-bottom: 15px;">
-					<h5 class="card-title">{{dessert.recipe_name}}</h5>
-					<p class="card-text">{{dessert.recipe_description}}</p>
-					<footer>Recipe submitted by <em>{{dessert.author}}</em></footer>
-					<a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
+		<div class="recipe-container col-xs-12 col-lg-4 col-md-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{dessert.img_url}}" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{dessert.recipe_name}}</h4>
+                    <p class="card-text">{{dessert.recipe_description}}</p>
+                    <footer>Recipe submitted by <em>{{dessert.author}}</em></footer>					
+                </div>
+                <div class="card-footer">            
+                    <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
 						class="waves-effect waves">
                         <button type="button" class="btn btn-primary btn-lg">
-                        View
-                        </button>
-                    </a>
-				</div>
-			</div>
-		</div>     
+                        <i class="fa fa-eye"></i>
+                        View                        
+                        </button>                        
+                    </a>              
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <!--Empty row to fix styling issue in which Bootstrap grid system was not displaying correctly-->
+        </div>     
         {% endfor %}
         <div class="center">
             <div class="pagination">
