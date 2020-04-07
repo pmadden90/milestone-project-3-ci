@@ -145,7 +145,7 @@ def get_equipment():
 
     offset = int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
-    #page = int(request.args.get('page', 2))
+    page = int(request.args.get('page', 2))
 
     starting_id = shop.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
@@ -160,11 +160,10 @@ def get_equipment():
     next_url='/equipment?limit=' + str(limit) + '&offset=' + str(offset + limit)
     prev_url='/equipment?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
-    #pagination = Pagination(page=page,limit=PER_PAGE, total=len(List), record_name='List')
+    pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
-    #return render_template("recipes.html", recipes=mongo.db.desserts.find().limit(6))
-    #return render_template("recipes.html", recipes=output) #, pagination=pagination
-    return render_template('equipment.html', equipment=output)
+    
+    return render_template('equipment.html', equipment=output, pagination=pagination)
 
 # -------------------- #
 #   Other Functions    #
