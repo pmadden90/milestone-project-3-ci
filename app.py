@@ -3,7 +3,7 @@ import math
 from flask import Flask, render_template, redirect, request, url_for, session, jsonify
 from flask_pymongo import PyMongo, pymongo
 from flask_bootstrap import Bootstrap
-#from flask_paginate import Pagination, get_page_parameter
+from flask_paginate import Pagination, get_page_parameter 
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -73,7 +73,7 @@ def get_recipes():
 
     offset = int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
-    #page = int(request.args.get('page', 2))
+    page = int(request.args.get('page', 2))
 
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
@@ -88,10 +88,10 @@ def get_recipes():
     next_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
     prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
-    #pagination = Pagination(page=page,limit=PER_PAGE, total=len(List), record_name='List')
+    pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
-    #return render_template("recipes.html", recipes=mongo.db.desserts.find().limit(6))
-    return render_template("recipes.html", recipes=output) #, pagination=pagination
+    
+    return render_template("recipes.html", recipes=output, pagination=pagination) #, 
 
 @app.route('/recipes/new')
 def add_recipe():
