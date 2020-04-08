@@ -155,24 +155,27 @@ def get_equipment():
     offset = int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     page = int(request.args.get('page', 2))
-
+    total = mongo.db.equipment.count()
+    per_page = limit
+    pagination = get_pagination(page=page,
+                            per_page=per_page,   #results per page
+                            total=total,         #total number of results 
+                            format_total=True,   #format total. example 1,024
+                            format_number=True,  #turn on format flag
+                            record_name='repositories', #provide context
+                            )
     starting_id = shop.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
 
     equipment = shop.find({'_id': {'$gte': last_id}}).sort('item_name', pymongo.ASCENDING).limit(limit)
-    output = []
-
-    for i in equipment:
-        output.append({'item_name': i['item_name'], 'item_url': i['item_url'],
-        'img_src': i['img_src']})
-
+    
     next_url='/equipment?limit=' + str(limit) + '&offset=' + str(offset + limit)
     prev_url='/equipment?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
     pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
     
-    return render_template('equipment.html', equipment=output, pagination=pagination)
+    return render_template('equipment.html', equipment=equipment, pagination=pagination)
 
 # -------------------- #
 #   Other Functions    #
