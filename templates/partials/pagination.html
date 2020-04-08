@@ -1,11 +1,5 @@
-{% extends 'base.html' %} {% block content %}
-<h1 align="center">Just Desserts</h1>
-
-
-<div class="container full-width">
-    {% include 'partials/recipecard.html' %}
-	{% if total > 1 %}
-            {{ pagination.info }}
+{% if total > 1 %}
+    {{ pagination.info }}
             {{ pagination.links }}
         <div class="center">
             <div class="pagination">
@@ -17,14 +11,8 @@
                 <a href="#">5</a>
                 <a href="#">6</a>
                 <a href="#">&raquo;</a>
-            </div>
-            
+            </div>            
         </div>
-        {% endif %}     
         {{ pagination.links }}
-</div>
-
-
-
-
-{% endblock %}
+        {% endif %}     
+    

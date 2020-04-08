@@ -1,0 +1,26 @@
+<div class="row text-center">
+    {% for dessert in recipes %}
+		<div class="recipe-container col-xs-12 col-lg-4 col-md-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{dessert.img_url}}" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{dessert.recipe_name}}</h4>
+                    <p class="card-text">{{dessert.recipe_description}}</p>
+                    <footer>Recipe submitted by <em>{{dessert.author}}</em></footer>					
+                </div>
+                <div class="card-footer">            
+                    <a href="{{ url_for('view_recipe', dessert_id=dessert._id)}}"
+						class="waves-effect waves">
+                        <button type="button" class="btn btn-primary btn-lg">
+                        <i class="fa fa-eye"></i>
+                        View                        
+                        </button>                        
+                    </a>              
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <!--Empty row to fix styling issue in which Bootstrap grid system was not displaying correctly-->
+        </div>     
+    {% endfor %}                       
+</div>

@@ -69,36 +69,33 @@ def homepage_index():
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
 
-    dessert = mongo.db.desserts
-    page, per_page, offset = get_page_items()
+    dessert = mongo.db.desserts    
+
+    offset = int(request.args.get('offset')) if request.args.get('offset') else 1
+    limit = int(request.args.get('limit')) if request.args.get('offset') else 8
+    page = int(request.args.get('page', 2))
+    total = mongo.db.desserts.count()
+    per_page = limit
     pagination = get_pagination(page=page,
                             per_page=per_page,   #results per page
                             total=total,         #total number of results 
                             format_total=True,   #format total. example 1,024
                             format_number=True,  #turn on format flag
                             record_name='repositories', #provide context
-                            )         
-    offset = int(request.args.get('offset')) if request.args.get('offset') else 1
-    limit = int(request.args.get('limit')) if request.args.get('offset') else 8
-    page = int(request.args.get('page', 2))
+                            )
 
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
 
     desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(limit)
-    output = []
-
-    for i in desserts:
-        output.append({'recipe_name': i['recipe_name'], 'recipe_description': i['recipe_description'],
-        'img_url': i['img_url'], 'author': i['author']})
-
+    
     next_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
     prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
     pagination = Pagination(page=page,limit=limit)
     #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
     
-    return render_template("recipes.html", recipes=output, pagination=pagination,page=page,
+    return render_template("recipes.html", recipes=desserts, pagination=pagination, page=page,
         total=total, per_page=per_page)
 
 @app.route('/recipes/new')
