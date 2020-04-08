@@ -66,7 +66,11 @@ def homepage_index():
 ###def signup():
     ###return render_template('signup.html')
 
-@app.route('/recipes', methods=['GET'])
+@app.route('/recipes/', methods=['GET']) #defaults={'page': 1},
+#@app.route('/recipes', defaults={'page': 1}, methods=['GET'])
+#@app.route('/recipes/page/<int:page>/', methods=['GET'])
+#@app.route('/recipes/page/<int:page>', methods=['GET'])
+
 def get_recipes():
 
     dessert = mongo.db.desserts    
