@@ -66,20 +66,24 @@ def homepage_index():
 ###def signup():
     ###return render_template('signup.html')
 
+def paginate_recipes(offset=0, per_page=6):
+    recipes = mongo.db.desserts
+    offset = get_page_items
+    return recipes[offset: offset + per_page]
+
 @app.route('/recipes/', methods=['GET']) #defaults={'page': 1},
-#@app.route('/recipes', defaults={'page': 1}, methods=['GET'])
-#@app.route('/recipes/page/<int:page>/', methods=['GET'])
 #@app.route('/recipes/page/<int:page>', methods=['GET'])
 
 def get_recipes():
 
     dessert = mongo.db.desserts    
-
-    offset = int(request.args.get('offset')) if request.args.get('offset') else 1
+    #int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     page = int(request.args.get('page', 2))
     total = mongo.db.desserts.count()
     per_page = limit
+    offset = get_page_items
+    pagination_recipes = paginate_recipes(offset=offset, per_page=per_page)
     pagination = get_pagination(page=page,
                             per_page=per_page,   #results per page
                             total=total,         #total number of results 
@@ -97,10 +101,8 @@ def get_recipes():
     prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
 
     pagination = Pagination(page=page,limit=limit)
-    #return jsonify ({'result': output, 'prev_url': '', 'next_url': ''})
-    
     return render_template("recipes.html", recipes=desserts, pagination=pagination, page=page,
-        total=total, per_page=per_page)
+    total=total, per_page=per_page)
 
 @app.route('/recipes/new')
 def add_recipe():
