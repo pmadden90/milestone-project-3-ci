@@ -3,7 +3,7 @@ import math
 from flask import Flask, render_template, redirect, request, url_for, session, jsonify
 from flask_pymongo import PyMongo, pymongo
 from flask_bootstrap import Bootstrap
-from flask_paginate import Pagination, get_page_parameter 
+from flask_paginate import Pagination, get_page_parameter, get_page_args
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -78,12 +78,12 @@ def get_recipes():
 
     dessert = mongo.db.desserts    
     #int(request.args.get('offset')) if request.args.get('offset') else 1
-    limit = int(request.args.get('limit')) if request.args.get('offset') else 8
+    limit = int(request.args.get('limit')) if request.args.get('offset') else 6
     page = int(request.args.get('page', 2))
     total = mongo.db.desserts.count()
     per_page = limit
-    offset = get_page_items
-    pagination_recipes = paginate_recipes(offset=offset, per_page=per_page)
+    offset = 0 #get_page_items
+    #pagination_recipes = paginate_recipes(offset=offset, per_page=per_page)
     pagination = get_pagination(page=page,
                             per_page=per_page,   #results per page
                             total=total,         #total number of results 
