@@ -71,13 +71,13 @@ def paginate_recipes(offset=0, per_page=6):
     offset = get_page_items
     return recipes[offset: offset + per_page]
 
-@app.route('/recipes/', methods=['GET']) #defaults={'page': 1},
-#@app.route('/recipes/page/<int:page>', methods=['GET'])
+@app.route('/recipes/',defaults={'page': 1}, methods=['GET']) #defaults={'page': 1},
+@app.route('/recipes/page/<int:page>', methods=['GET'])
 
-def get_recipes():
+def get_recipes(page):
 
     dessert = mongo.db.desserts    
-    #int(request.args.get('offset')) if request.args.get('offset') else 1
+    int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 6
     page = int(request.args.get('page', 2))
     total = mongo.db.desserts.count()
