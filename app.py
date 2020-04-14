@@ -104,6 +104,7 @@ def get_recipes(page):
     return render_template("recipes.html", recipes=desserts, pagination=pagination, page=page,
     total=total, per_page=per_page)
 
+
 @app.route('/recipes/new')
 def add_recipe():
     _uom = mongo.db.units_of_measurement.find()    
