@@ -12,5 +12,16 @@
                     </tbody>
                 </table>
             {{ pagination.links }}
+         {% for page in dessert.pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page %}
+                {% if dessert.page == page %}
+                    <a class="btn btn-info mb-4" href="{{ url_for('get_recipes', username=user.username, page=page) }}">{{ page }}</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href="{{ url_for('get_recipes', username=user.username, page=page) }}">{{ page }}</a>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+         {% endfor %}
             
     
