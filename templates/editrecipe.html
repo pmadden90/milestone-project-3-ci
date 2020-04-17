@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block content %}
+<h1>Just Desserts</h1>
 <div class="center">
     <div class="container full-width">
         <h3 align="center">Editing {{ recipe.recipe_name }}</h3>
@@ -115,7 +116,10 @@
 					                <div class="row submit-recipe-button">
 						                <div class="col-xs-6">
 							                <i class="fa fa-check-circle"></i>
-							                <button class="btn-success" type="button submit">Submit Edits</button>
+							                <button class="btn-success" type="button submit">
+                                                <a href="{{ url_for('update_recipe', dessert_id=recipe._id) }}"
+								                class="btn waves-effect waves-light deep-orange darken-4">Submit Edits</a>
+                                            </button>
 						                </div>
 						                <div class="col-xs-6">
 							                <i class="fa fa-trash-o"></i>

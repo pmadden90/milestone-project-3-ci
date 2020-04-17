@@ -81,6 +81,13 @@ h1 {
     color: #2A1911;
 }
 
+.home-button {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #2A1911 !important;
+    color: #fafafa !important;
+}
+
 .add-another{
     font-size: 14px;
 }
@@ -199,6 +206,14 @@ h1 {
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;
+}
+/*Image Buffers*/
+.image-buffer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    max-height: 57.5vh;
 }
 
 /*Media Queries*/

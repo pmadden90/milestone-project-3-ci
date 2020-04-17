@@ -71,6 +71,7 @@ def paginate_recipes(offset=0, per_page=6):
     offset = get_page_items
     return recipes[offset: offset + per_page]
 
+#Recipes Page
 @app.route('/recipes/',defaults={'page': 1}, methods=['GET']) #defaults={'page': 1},
 @app.route('/recipes/page/<int:page>', methods=['GET'])
 
@@ -110,17 +111,21 @@ def add_recipe():
     _uom = mongo.db.units_of_measurement.find()    
     return render_template("addrecipe.html", uom=_uom)
 
+#View Individual Recipe
 @app.route('/recipe/<dessert_id>')
 def view_recipe(dessert_id):
     the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})
     return render_template("viewrecipe.html", recipe=the_recipe)
 
+#Edit Selected Recipe
 @app.route('/recipe/<dessert_id>/edit')
 def edit_recipe(dessert_id):
     the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})    
     return render_template('editrecipe.html', recipe=the_recipe)
 
-@app.route('/recipe/<dessert_id>/update', methods=["POST"])
+
+#Updating Recipe In MongoDB
+@app.route('/recipe/<dessert_id>/update', methods=["GET", "POST"])
 def update_recipe(dessert_id):
     desserts = mongo.db.desserts
     recipe_edit = {
@@ -134,16 +139,29 @@ def update_recipe(dessert_id):
         'vegan_friendly':request.form.get('vegan_friendly')
     }
     desserts.update({"_id": ObjectId(dessert_id)}, recipe_edit),  
-    return redirect(url_for('get_recipes'))
+    return redirect(url_for('edit_success'))
 
+#Recipe Updated - Success Screen
+@app.route('/recipe/editsuccess')
+def edit_success():    
+    return render_template('recipeupdated.html')
+
+#Adding Recipe
 @app.route('/recipe/insert', methods=['POST'])
 def insert_recipe():
     desserts = mongo.db.desserts    
     recipe_to_be_inserted = request.form
     recipe = recipe_to_be_inserted.to_dict()
     desserts.insert_one(recipe)
-    return redirect(url_for('get_recipes'))
+    return redirect(url_for('insert_success'))
 
+#Recipe Added - Success Screen
+@app.route('/recipe/insert/<dessert_id>/success')
+def insert_success():
+    desserts = mongo.db.desserts.find_one({'_id': ObjectId(dessert_id)})
+    return render_template('recipeadded.html')
+
+#Deleting Recipe
 @app.route('/recipe/<dessert_id>/delete')
 def delete_recipe(dessert_id):
     mongo.db.desserts.delete_one({'_id': ObjectId(dessert_id)})

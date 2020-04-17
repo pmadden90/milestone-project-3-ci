@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h1 align="center">Just Desserts</h1>
+
+<div class="container full-width">
+    {% for dessert in recipes %}
+        <h2>Thanks for sharing your recipe, {{dessert.author}}</h2>
+    {% endfor %}
+    <div class="row">
+        <a href="{{ url_for(' homepage_index')}}" class="btn btn-primary btn-lg">Take Me Home</a>
+    </div>
+</div>
+
+{% endblock %}
