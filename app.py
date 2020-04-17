@@ -111,6 +111,21 @@ def add_recipe():
     _uom = mongo.db.units_of_measurement.find()    
     return render_template("addrecipe.html", uom=_uom)
 
+#Adding Recipe
+@app.route('/recipe/insert', methods=['POST'])
+def insert_recipe():
+    desserts = mongo.db.desserts    
+    recipe_to_be_inserted = request.form
+    recipe = recipe_to_be_inserted.to_dict()
+    desserts.insert_one(recipe)
+    return redirect(url_for('insert_success'))
+
+#Recipe Added - Success Screen
+@app.route('/recipe/success')
+def insert_success():
+    return render_template("recipeadded.html")
+
+
 #View Individual Recipe
 @app.route('/recipe/<dessert_id>')
 def view_recipe(dessert_id):
@@ -146,25 +161,17 @@ def update_recipe(dessert_id):
 def edit_success():    
     return render_template('recipeupdated.html')
 
-#Adding Recipe
-@app.route('/recipe/insert', methods=['POST'])
-def insert_recipe():
-    desserts = mongo.db.desserts    
-    recipe_to_be_inserted = request.form
-    recipe = recipe_to_be_inserted.to_dict()
-    desserts.insert_one(recipe)
-    return redirect(url_for('insert_success'))
-
-#Recipe Added - Success Screen
-@app.route('/recipe/success')
-def insert_success():
-    return render_template("recipeadded.html")
-
 #Deleting Recipe
 @app.route('/recipe/<dessert_id>/delete')
 def delete_recipe(dessert_id):
     mongo.db.desserts.delete_one({'_id': ObjectId(dessert_id)})
-    return redirect(url_for('get_recipes'))
+    return redirect(url_for('delete_success'))
+
+#Recipe Deleted - Success Screen
+@app.route('/recipe/deleted')
+def delete_success():
+    return render_template("recipedeleted.html")
+
 
 ###EQUIPMENT
 @app.route('/equipment')

@@ -68,19 +68,19 @@
 						<div class="switch form-check form-check-inline">
 							<input class="form-check-input" id="contains_nuts" name="contains_nuts" type="checkbox">
 							<label class="form-check-label" for="contains_nuts">
-                                Does this recipe contain nuts?
+                               Tick this box if this recipe contain nuts?
                             </label>
 						</div>
 						<div class="switch form-check form-check-inline">
 							<input class="form-check-input" id="gluten_free" name="gluten_free" type="checkbox">
 							<label class="form-check-label" for="gluten_free">
-                                Does this recipe contain gluten?
+                                Tick this box if this recipe contain gluten?
                             </label>
 						</div>
 						<div class="switch form-check form-check-inline">
 							<input class="form-check-input" id="vegan_friendly" name="vegan_friendly" type="checkbox">
 							<label class="form-check-label" for="vegan_friendly">
-                                Is this recipe vegan-friendly?
+                                Tick this box if this recipe is vegan-friendly?
                             </label>
 						</div>
                     </div>
@@ -97,7 +97,7 @@
 					<div class="row submit-recipe-button">
 						<i class="fa fa-check-circle"></i>
                         <button>
-						    <a href="{{ url_for('insert_recipe', dessert_id=recipe._id) }}"
+						    <a href="{{ url_for('insert_recipe') }}"
 						    class="btn waves-effect waves-light btn-success">Submit Recipe</a>
                         </button>
 					</div>
