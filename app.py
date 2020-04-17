@@ -121,7 +121,7 @@ def view_recipe(dessert_id):
 @app.route('/recipe/<dessert_id>/edit')
 def edit_recipe(dessert_id):
     the_recipe = mongo.db.desserts.find_one({"_id": ObjectId(dessert_id)})    
-    return render_template('editrecipe.html', recipe=the_recipe)
+    return render_template("editrecipe.html", recipe=the_recipe)
 
 
 #Updating Recipe In MongoDB
@@ -156,10 +156,9 @@ def insert_recipe():
     return redirect(url_for('insert_success'))
 
 #Recipe Added - Success Screen
-@app.route('/recipe/insert/<dessert_id>/success')
+@app.route('/recipe/success')
 def insert_success():
-    desserts = mongo.db.desserts.find_one({'_id': ObjectId(dessert_id)})
-    return render_template('recipeadded.html')
+    return render_template("recipeadded.html")
 
 #Deleting Recipe
 @app.route('/recipe/<dessert_id>/delete')
