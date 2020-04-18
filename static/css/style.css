@@ -166,9 +166,6 @@ h1 {
     font-family: Molle;
 }
 /*Pagination Settings - copied from https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_active_round*/
-.pagination {
-  display: inline-block;
-}
 
 .center {
   text-align: center;
@@ -201,8 +198,8 @@ h1 {
     font-size: 12px;
 }
 .pagination-page-info b {
-    color: black;
-    //background: #FFFF00;
+    color: #fafafa;
+    background-color: #2A1911;
     padding-left: 2px;
     padding: .1em .25em;
     font-size: 150%;

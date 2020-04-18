@@ -21,3 +21,27 @@
                 ...
             {% endif %}
          {% endfor %}-->
+
+    ### 
+     int(request.args.get('offset')) if request.args.get('offset') else 1
+    limit = int(request.args.get('limit')) if request.args.get('offset') else 6
+    page = int(request.args.get('page', 2))
+    total = mongo.db.desserts.count()
+    per_page = limit
+    offset = 0 #get_page_items
+    #pagination_recipes = paginate_recipes(offset=offset, per_page=per_page)
+    pagination = get_pagination(page=page,
+                            per_page=per_page,   #results per page
+                            total=total,         #total number of results 
+                            format_total=True,   #format total. example 1,024
+                            format_number=True,  #turn on format flag
+                            record_name='repositories', #provide context
+                            )
+
+    starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
+    last_id = starting_id[offset]['_id']
+    
+    next_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
+    prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
+
+    pagination = Pagination(page=page,limit=limit)

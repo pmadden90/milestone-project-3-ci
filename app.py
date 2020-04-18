@@ -74,36 +74,37 @@ def paginate_recipes(offset=0, per_page=6):
 #Recipes Page
 @app.route('/recipes/',defaults={'page': 1}, methods=['GET']) #defaults={'page': 1},
 @app.route('/recipes/page/<int:page>', methods=['GET'])
-
+    
 def get_recipes(page):
 
-    dessert = mongo.db.desserts    
-    int(request.args.get('offset')) if request.args.get('offset') else 1
-    limit = int(request.args.get('limit')) if request.args.get('offset') else 6
-    page = int(request.args.get('page', 2))
+    dessert = mongo.db.desserts
+    #First Page
+    #desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6)
+    #Second Page
+    #dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6).skip(6)
+    #Third Page
+    #dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6).skip(6)
     total = mongo.db.desserts.count()
-    per_page = limit
-    offset = 0 #get_page_items
-    #pagination_recipes = paginate_recipes(offset=offset, per_page=per_page)
+    limit = 6
+    num_of_pages = total/limit + 1
     pagination = get_pagination(page=page,
-                            per_page=per_page,   #results per page
+                            per_page=limit,   #results per page
                             total=total,         #total number of results 
                             format_total=True,   #format total. example 1,024
                             format_number=True,  #turn on format flag
-                            record_name='repositories', #provide context
+                            record_name='recipes', #provide context
                             )
-
+    #page_number = int
+    #skipped = (page_number - 1) * limit
+    offset = 0
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
-
     desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(limit)
+    documents_cursor = mongo.db.desserts.find() # returns a cursor. you can sort at this point
+    desserts_in_page = documents_cursor.skip(6).limit(limit)
     
-    next_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset + limit)
-    prev_url='/recipes?limit=' + str(limit) + '&offset=' + str(offset - limit)
-
-    pagination = Pagination(page=page,limit=limit)
     return render_template("recipes.html", recipes=desserts, pagination=pagination, page=page,
-    total=total, per_page=per_page)
+    total=total, per_page=limit)
 
 
 @app.route('/recipes/new')

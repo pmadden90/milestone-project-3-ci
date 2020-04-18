@@ -3,15 +3,14 @@
             {{ pagination.links }}
                 <table class="table table-hover">
                     <tbody>
-                    {% for dessert in desserts %}
+                    {% for dessert in recipes %}
                         <tr>
                             <td>{{ loop.index + (page - 1) * per_page }}</td>
-                            <td>{{ dessert }}</td>
+                            <td>{{ total }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-            {{ pagination.links }}
          
             
     
