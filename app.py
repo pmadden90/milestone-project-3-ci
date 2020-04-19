@@ -22,7 +22,7 @@ DBS_NAME = "recipes_db"
 COLLECTION_NAME = "desserts"
 app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
 app.secret_key = os.getenv("SECRET_KEY")
-
+usernames_collection = "users"
 mongo = PyMongo(app)
 
 # -------------------- #
@@ -47,6 +47,15 @@ def signup():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f'Account created for {form.username.data}!', 'success')
+        # Add new user to database
+        register = {
+            "username": request.form.get("new_username"),
+            "username_lower": request.form.get("new_username").lower(),
+            "user_password": generate_password_hash(
+                request.form.get("new_password")),
+            "user_recipes": []            
+        }
+        usernames_collection.insert_one(register)
         return redirect(url_for("user_home"))
     return render_template('signup.html', title='Login', form=form)
 
@@ -55,16 +64,26 @@ def login_page():
     users = mongo.db.users
     return render_template('login.html')
 
-@app.route('/user/login', methods = ["POST"])
+@app.route('/user/login', methods = ["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
             flash('You have been logged in!', 'success')
-            return redirect(url_for('homepage_index'))
+            return redirect(url_for("user_home"))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+
+        
+        # put the user in 'session'
+        #session["user"] = request.form.get("new_username").lower()
+        #return redirect(url_for("users.profile", username=session["user"]))
+#Users
+# Find username in lowercase 
+def username_lower(user_lower):
+    return usernames_collection.find_one({"username_lower": user_lower.lower()})
 
 @app.route('/user')
 def user():

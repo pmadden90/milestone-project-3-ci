@@ -36,7 +36,19 @@
 	<!-- Main Content -->
 	<div class="container">
         <div class="page-effect">        
-		    {% block content %} {% endblock %}
+		    {% block content %}
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>                
+            {% endblock %}
         </div>
 	</div>
 
