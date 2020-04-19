@@ -1,16 +1,19 @@
 import os
 import math
-from flask import Flask, render_template, redirect, request, url_for, session, jsonify
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo, pymongo
 from flask_bootstrap import Bootstrap
 from flask_paginate import Pagination, get_page_parameter, get_page_args
+from flask_bcrypt import Bcrypt
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
     import env
+from forms import RegistrationForm, LoginForm
+    
 
 app = Flask(__name__)
-
+bcrypt = Bcrypt(app)
 # -------------------- #
 #    DB Collections    #
 # -------------------- #
@@ -25,51 +28,61 @@ mongo = PyMongo(app)
 # -------------------- #
 #        Routes        #
 # -------------------- #
-###RECIPES
+#Homepage
 @app.route('/')
 def homepage_index():
+    return render_template("landing.html", recipes=mongo.db.desserts.aggregate(
+        [{'$sample': {'size': 3 }}]
+        ))
+
+@app.route('/user/homepage')
+def user_home():
     return render_template("index.html", recipes=mongo.db.desserts.aggregate(
         [{'$sample': {'size': 3 }}]
         ))
 
-###@app.route('/user/login/page')
-###def login_page():
-    ###users = mongo.db.users
-    ###return render_template('login.html')
+#Login/Register
+@app.route('/user/signup', methods=["GET", "POST"])
+def signup():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for("user_home"))
+    return render_template('signup.html', title='Login', form=form)
 
-###@app.route('/user/login', methods = ["POST", "GET"])
-###def login():
-    ###users = mongo.db.users
-    ###login_user = users.find_one({'name': request.form['username']}) 
-    ###if request.method == "POST":
-        ###user = request.form["nm"]
-        ###session["user"] = user
-        ###return redirect(url_for("user"))
-    ###else:
-        ###if 'user' in session:
-            ###return redirect (url_for('user'))
+@app.route('/user/login/page')
+def login_page():
+    users = mongo.db.users
+    return render_template('login.html')
 
-    ###return render_template('login.html')
+@app.route('/user/login', methods = ["POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('homepage_index'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
 
-###@app.route('/user')
-###def user():
-    ###if "user" in session:
-        ###user = session["user"]
-        ###return f"<h1>{{user}}</h1>"
+@app.route('/user')
+def user():
+    if "user" in session:
+        user = session["user"]
+        return f"<h1>{{user}}</h1>"
 
-###@app.route('/user/logout')
-###def logout():
-    ###session.pop("user", None)
-    ###return redirect(url_for('login'))  
+@app.route('/user/logout')
+def logout():
+    session.pop("user", None)
+    return redirect(url_for('login'))  
 
-###@app.route('/user/signup', methods=["POST"])
-###def signup():
-    ###return render_template('signup.html')
-
+#Pagination
 def paginate_recipes(offset=0, per_page=6):
     recipes = mongo.db.desserts
     offset = get_page_items
     return recipes[offset: offset + per_page]
+
 
 #Recipes Page
 @app.route('/recipes/',defaults={'page': 1}, methods=['GET']) #defaults={'page': 1},

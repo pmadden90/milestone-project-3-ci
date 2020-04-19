@@ -1,0 +1,20 @@
+    <!-- Jumbotron Header -->
+    <div class="masthead-image"> 
+        <header class="jumbotron" style="background-color: transparent">
+            <h1>Just Desserts<i class="fa fa-utensil-spoon"></i></h1>
+            <p class="lead">A place for all your sweet treats - login to 
+             share your own and see <br> what everyone else is sharing!</p>             
+            <a href="{{ url_for('signup')}}" class="btn btn-primary btn-lg">Sign Up/Login</a>
+        </header>
+    </div>
+    
+    {% extends 'base.html' %} {% block content %}
+  <!-- Page Content -->
+  <div class="container full-width">   
+    
+    <!-- Page Features -->
+    {% include 'partials/recipecard.html' %}
+    
+  </div>
+
+  {% endblock %}
