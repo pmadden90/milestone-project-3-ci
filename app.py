@@ -68,7 +68,14 @@ def login_page():
 
 @app.route('/user/login', methods = ["GET", "POST"])
 def login():
-    form = LoginForm()
+    users = mongo.db.users
+    login_user = users.find_one({'username': request.form['username']})
+
+    if login_user:
+        if bcrypt.haspw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for("user_home"))
+ form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
             flash('You have been logged in!', 'success')
