@@ -4,7 +4,8 @@ from flask import Flask, render_template, redirect, request, url_for, session, f
 from flask_pymongo import PyMongo, pymongo
 from flask_bootstrap import Bootstrap
 from flask_paginate import Pagination, get_page_parameter, get_page_args
-from flask_bcrypt import Bcrypt
+import bcrypt
+from flask_login import login_user, current_user, logout_user, login_required
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -13,7 +14,6 @@ from forms import RegistrationForm, LoginForm
     
 
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 # -------------------- #
 #    DB Collections    #
 # -------------------- #
@@ -45,19 +45,21 @@ def user_home():
 @app.route('/user/signup', methods=["GET", "POST"])
 def signup():
     form = RegistrationForm()
-    if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        # Add new user to database
-        register = {
-            "username": request.form.get("new_username"),
-            "username_lower": request.form.get("new_username").lower(),
-            "user_password": generate_password_hash(
-                request.form.get("new_password")),
-            "user_recipes": []            
-        }
-        usernames_collection.insert_one(register)
-        return redirect(url_for("user_home"))
+    if request.method == 'POST':
+        users = mongo.db.users
+        existing_user = users.find_one({'username': request.form['username']})
+
+        if existing_user is None:
+            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'username': request.form['username'], 'password': hashpass })
+            session['username'] = request.form['username']
+            return redirect(url_for("user_home"))
+
+        return 'That username already exists!'
+
     return render_template('signup.html', title='Login', form=form)
+        
+    
 
 @app.route('/user/login/page')
 def login_page():
@@ -251,7 +253,7 @@ def get_page_items():
     page = int(request.args.get('page', 1))
     per_page = request.args.get('per_page')
     if not per_page:
-        per_page = PER_PAGE
+        per_page = per_page
     else:
         per_page = int(per_page)
     offset = (page - 1) * per_page
