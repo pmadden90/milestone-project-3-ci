@@ -69,13 +69,13 @@ def login_page():
 @app.route('/user/login', methods = ["GET", "POST"])
 def login():
     users = mongo.db.users
-    login_user = users.find_one({'username': request.form['username']})
+    login_user = users.find_one({'username': request.form.get['users']})
 
     if login_user:
         if bcrypt.haspw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
             session['username'] = request.form['username']
             return redirect(url_for("user_home"))
- form = LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'admin@blog.com' and form.password.data == 'password':
             flash('You have been logged in!', 'success')
@@ -148,10 +148,11 @@ def get_recipes(page):
     total=total, per_page=limit)
 
 
-@app.route('/recipes/new')
-def add_recipe():
-    _uom = mongo.db.units_of_measurement.find()    
-    return render_template("addrecipe.html", uom=_uom)
+@app.route('/recipes/new/<user_id>')
+def add_recipe(user_id):
+    users = mongo.db.users
+    the_user = mongo.db.users.find_one({"_id": ObjectId(user_id)})   
+    return render_template("addrecipe.html", users=users, user=the_user)
 
 #Adding Recipe
 @app.route('/recipe/insert', methods=['POST'])
