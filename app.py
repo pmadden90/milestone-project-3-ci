@@ -5,8 +5,9 @@ from flask_pymongo import PyMongo, pymongo
 from flask_bootstrap import Bootstrap
 from flask_paginate import Pagination, get_page_parameter, get_page_args
 import bcrypt
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from bson.objectid import ObjectId
+from models import Users
 from os import path
 if path.exists("env.py"):
     import env
@@ -24,7 +25,7 @@ app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
 app.secret_key = os.getenv("SECRET_KEY")
 usernames_collection = "users"
 mongo = PyMongo(app)
-
+login_manager = LoginManager(app)
 # -------------------- #
 #        Routes        #
 # -------------------- #
@@ -68,21 +69,19 @@ def login_page():
 
 @app.route('/user/login', methods = ["GET", "POST"])
 def login():
-    users = mongo.db.users
-    login_user = users.find_one({'username': request.form.get['users']})
-
-    if login_user:
-        if bcrypt.haspw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
-            session['username'] = request.form['username']
-            return redirect(url_for("user_home"))
-    form = LoginForm()
-    if form.validate_on_submit():
-        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
-            flash('You have been logged in!', 'success')
+    #if login_user:
+        #if bcrypt.haspw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+         #   session['username'] = request.form['username']
+          #  return redirect(url_for("user_home"))
+        form = LoginForm()
+        if form.validate_on_submit():
+            the_user = Users.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for("user_home"))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
+        return render_template('login.html', title='Login', form=form)
 
 
         
