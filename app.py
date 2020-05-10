@@ -7,11 +7,11 @@ from flask_paginate import Pagination, get_page_parameter, get_page_args
 import bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from bson.objectid import ObjectId
-from models import Users
 from os import path
 if path.exists("env.py"):
     import env
 from forms import RegistrationForm, LoginForm
+from models import User
     
 
 app = Flask(__name__)
@@ -45,19 +45,16 @@ def user_home():
 #Login/Register
 @app.route('/user/signup', methods=["GET", "POST"])
 def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('user_home'))
     form = RegistrationForm()
-    if request.method == 'POST':
-        users = mongo.db.users
-        existing_user = users.find_one({'username': request.form['username']})
-
-        if existing_user is None:
-            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'username': request.form['username'], 'password': hashpass })
-            session['username'] = request.form['username']
-            return redirect(url_for("user_home"))
-
-        return 'That username already exists!'
-
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        mongo.session.add(user)
+        mongo.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('login'))
     return render_template('signup.html', title='Login', form=form)
         
     
@@ -69,13 +66,15 @@ def login_page():
 
 @app.route('/user/login', methods = ["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('user_home'))
     #if login_user:
         #if bcrypt.haspw(request.form['password'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
          #   session['username'] = request.form['username']
           #  return redirect(url_for("user_home"))
         form = LoginForm()
         if form.validate_on_submit():
-            the_user = Users.query.filter_by(email=form.email.data).first()
+            the_user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             return redirect(url_for("user_home"))
