@@ -53,23 +53,23 @@ def user_home():
 @app.route('/user/signup', methods=["GET", "POST"])
 def signup():
     # Check if user is not logged in already
-	if 'user' in session:
-		flash('You are already sign in!')
-		return redirect(url_for('user_home'))
+	#if 'user' in session:
+	#	flash('You are already sign in!')
+	#	return redirect(url_for('user_home'))
 	if request.method == 'POST':
 		form = request.form.to_dict()
-		# Check if the password and password1 actualy match 
-		if form['user_password'] == form['user_password1']:
+		# Check if the password and password1 match 
+		if form['password'] == form['password1']:
 			# If so try to find the user in db
 			user = usernames_collection.find_one({"username" : form['username']})
 			if user:
 				flash(f"{form['username']} already exists!")
-				return redirect(url_for('register'))
+				return redirect(url_for('signup'))
 			# If user does not exist register new user
 			else:				
 				# Hash password
-				hash_pass = generate_password_hash(form['user_password'])
-				#Create new user with hashed password
+				hash_pass = generate_password_hash(form['password'])
+				#Create new user with hashed password                
 				usernames_collection.insert_one(
 					{
 						'username': form['username'],
@@ -77,14 +77,14 @@ def signup():
 						'password': hash_pass
 					}
 				)
-				# Check if user is actualy saved
+				# Check if user is saved
 				user_in_db = usernames_collection.find_one({"username": form['username']})
 				if user_in_db:
 					# Log user in (add to session)
 					session['user'] = user_in_db['username']
 					return redirect(url_for('profile', user=user_in_db['username']))
 				else:
-					flash("There was a problem savaing your profile")
+					flash("There was a problem saving your profile")
 					return redirect(url_for('signup'))
 
 		else:
@@ -102,29 +102,29 @@ def logout():
 	return redirect(url_for('index'))
 
 # Profile Page
-@app.route('/profile/<user>')
-def profile(user): 
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username): 
 	# Check if user is logged in
 	if 'user' in session:
 		# If so get the user and pass him to template for now
-		user_in_db = usernames_collection.find_one({"username": user})
+		user_in_db = usernames_collection.find_one({"username": username})
 		return render_template('profile.html', user=user_in_db)
 	else:
 		flash("You must be logged in!")
-		return redirect(url_for('index'))
+		return redirect(url_for('homepage_index'))
 
 # Admin area
 @app.route('/admin')
 def admin():
 	if 'user' in session:
-		if session['user'] == "admin":
+		if session['username'] == "admin":
 			return render_template('admin.html')
 		else:
 			flash('Only Admins can access this page!')
 			return redirect(url_for('index'))
 	else:
 		flash('You must be logged')
-		return redirect(url_for('index'))
+		return redirect(url_for('homepage_index'))
 
         
     
