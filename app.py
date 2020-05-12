@@ -11,27 +11,22 @@ if path.exists("env.py"):
     import env
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# -------------------- #
-#      App Config      #
-# -------------------- #
+
+###App Config     
 
 app = Flask(__name__)
 
-# -------------------- #
-#    DB Collections    #
-# -------------------- #
+###DB Collections
 MONGODB_URI = os.environ.get("MONGO_PM_MONGO")
 DBS_NAME = "recipes_db"
 COLLECTION_NAME = "desserts"
 app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
 app.secret_key = os.getenv("SECRET_KEY")
-usernames_collection = "users"
 mongo = PyMongo(app)
 users = mongo.db.users
 
-# -------------------- #
-#        Routes        #
-# -------------------- #
+
+###Routes
 #Homepage
 @app.route('/')
 def homepage_index():
@@ -45,10 +40,8 @@ def user_home():
         [{'$sample': {'size': 3 }}]
         ))
 
-# -------------------- #
-# User Authentication  #
-# -------------------- #
 
+###User Authentication 
 #Login/Register
 @app.route('/user/signup', methods=["GET", "POST"])
 def signup():
@@ -61,7 +54,7 @@ def signup():
 		# Check if the password and password1 match 
 		if form['password'] == form['password1']:
 			# If so try to find the user in db
-			user = usernames_collection.find_one({"username" : form['username']})
+			user = users.find_one({"username" : form['username']})
 			if user:
 				flash(f"{form['username']} already exists!")
 				return redirect(url_for('signup'))
@@ -70,7 +63,7 @@ def signup():
 				# Hash password
 				hash_pass = generate_password_hash(form['password'])
 				#Create new user with hashed password                
-				usernames_collection.insert_one(
+				users.insert_one(
 					{
 						'username': form['username'],
 						'email': form['email'],
@@ -78,7 +71,7 @@ def signup():
 					}
 				)
 				# Check if user is saved
-				user_in_db = usernames_collection.find_one({"username": form['username']})
+				user_in_db = users.find_one({"username": form['username']})
 				if user_in_db:
 					# Log user in (add to session)
 					session['user'] = user_in_db['username']
@@ -102,12 +95,12 @@ def logout():
 	return redirect(url_for('index'))
 
 # Profile Page
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username): 
+@app.route("/profile/<user>", methods=["GET", "POST"])
+def profile(user): 
 	# Check if user is logged in
 	if 'user' in session:
 		# If so get the user and pass him to template for now
-		user_in_db = usernames_collection.find_one({"username": username})
+		user_in_db = users.find_one({"username": user})
 		return render_template('profile.html', user=user_in_db)
 	else:
 		flash("You must be logged in!")
@@ -138,7 +131,7 @@ def login_page():
 def login():
 	# Check if user is not logged in already
 	if 'user' in session:
-		user_in_db = usernames_collection.find_one({"username": session['user']})
+		user_in_db = users.find_one({"username": session['user']})
 		if user_in_db:
 			# If so redirect user to his profile
 			flash("You are logged in already!")
@@ -152,7 +145,7 @@ def login():
 @app.route('/user_auth', methods=['POST'])
 def user_auth():
 	form = request.form.to_dict()
-	user_in_db = usernames_collection.find_one({"username": form['username']})
+	user_in_db = users.find_one({"username": form['username']})
 	# Check for user in database
 	if user_in_db:
 		# If passwords match (hashed / real password)
@@ -219,8 +212,8 @@ def get_recipes(page):
 
 @app.route('/recipes/new/<user_id>')
 def add_recipe(user_id):
-    users = mongo.db.users
-    the_user = mongo.db.users.find_one({"_id": ObjectId(user_id)})   
+    users = mongo.db.users.find()
+    the_user = mongo.db.users.find_one({"username": user_id})   
     return render_template("addrecipe.html", users=users, user=the_user)
 
 #Adding Recipe
@@ -316,10 +309,9 @@ def get_equipment():
     
     return render_template('equipment.html', equipment=equipment, pagination=pagination)
 
-# -------------------- #
-#   Other Functions    #
-# -------------------- #
-###Pagination - copied from https://harishvc.com/2015/04/15/pagination-flask-mongodb/
+
+### Other Functions    
+#Pagination - copied from https://harishvc.com/2015/04/15/pagination-flask-mongodb/
 def get_css_framework():
     return 'bootstrap4'
 def get_link_size():
