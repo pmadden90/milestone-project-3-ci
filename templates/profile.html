@@ -4,4 +4,11 @@
 
 <h1> Welcome {{ user.username }} </h1>
 
+<div class="container full-width">
+    <h2>What would you like to do?</h2>
+    <ul>
+        <a href="{{ url_for('homepage_index') }}"><li>Homepage</li></a>
+        <a href="{{ url_for('logout') }}"><li>Logout</li></a>        
+    </ul>
+</div>
 {% endblock %}

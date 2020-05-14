@@ -92,7 +92,7 @@ def logout():
 	# Clear the session
 	session.clear()
 	flash('You were logged out!')
-	return redirect(url_for('index'))
+	return redirect(url_for('homepage_index'))
 
 # Profile Page
 @app.route("/profile/<user>", methods=["GET", "POST"])
@@ -133,8 +133,8 @@ def login():
 	if 'user' in session:
 		user_in_db = users.find_one({"username": session['user']})
 		if user_in_db:
-			# If so redirect user to his profile
-			flash("You are logged in already!")
+			# If so redirect user to their profile
+			#flash("You are logged in already!")
 			return redirect(url_for('profile', user=user_in_db['username']))
 	else:
 		# Render the page for user to be able to log in
