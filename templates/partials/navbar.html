@@ -16,9 +16,9 @@
                     <li class="nav-item">
 						<a class="nav-link" href="{{ url_for('get_recipes') }}">View Recipes</a>
 					</li>
-                    {% if user %}
+                    {% if the_user %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('add_recipe', user_id=user_id) }}">Add Recipe</a>
+						<a class="nav-link" href="{{ url_for('add_recipe', the_user=the_user, user_id=user_id) }}">Add Recipe</a>
 					</li>
                         {% else %}
                         <li class="nav-item">

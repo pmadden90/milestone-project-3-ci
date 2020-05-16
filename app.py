@@ -166,7 +166,7 @@ def user_auth():
 			return redirect(url_for('login'))
 	else:
 		flash("You must be registered!")
-		return redirect(url_for('register'))
+		return redirect(url_for('signup'))
 
 
 #Pagination
@@ -215,8 +215,8 @@ def get_recipes(page):
 @app.route('/recipes/new/<user_id>', methods=['GET'])
 def add_recipe(user_id):
     users = mongo.db.users.find()
-    the_user = mongo.db.users.find_one({"username": session['username']})   
-    return render_template("addrecipe.html", users=users, user=the_user, user_id=user_id)
+    the_user = mongo.db.users.find_one({"_id": ObjectId(user_id)})   
+    return render_template("addrecipe.html", users=users, the_user=the_user)
 
 #Adding Recipe
 @app.route('/recipe/insert', methods=['POST'])
