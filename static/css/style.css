@@ -151,6 +151,14 @@ h1 {
     color: #FAEBD8 !important;
 }
 
+.fourofour-image {
+    background-image: url('../img/confused-idea-light.jpg') !important; 
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: transparent;
+    height: 95vh;
+    width: 100vw;
+}
 .full-width {
     width: 100vw;
 }

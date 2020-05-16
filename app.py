@@ -210,11 +210,11 @@ def get_recipes(page):
     total=total, per_page=limit)
 
 
-@app.route('/recipes/new/<user_id>')
+@app.route('/recipes/new/<user_id>', methods=['GET'])
 def add_recipe(user_id):
     users = mongo.db.users.find()
-    the_user = mongo.db.users.find_one({"username": user_id})   
-    return render_template("addrecipe.html", users=users, user=the_user)
+    the_user = mongo.db.users.find_one({"username": session['username']})   
+    return render_template("addrecipe.html", users=users, user=the_user, user_id=user_id)
 
 #Adding Recipe
 @app.route('/recipe/insert', methods=['POST'])
@@ -334,6 +334,16 @@ def get_pagination(**kwargs):
                       show_single_page=show_single_page_or_not(),
                       **kwargs
                       )
+
+# app name 
+@app.errorhandler(404) 
+  
+# inbuilt function which takes error as parameter 
+def not_found(e): 
+  
+# defining function 
+  return render_template("404.html") 
+
 
 ###Dropdown
 def dropdown_uom():
