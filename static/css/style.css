@@ -152,13 +152,18 @@ h1 {
 }
 
 .fourofour-image {
-    background-image: url('../img/confused-idea-light.jpg') !important; 
+    background-image: url('../img/chef-thinking.jpg') !important; 
     background-repeat: no-repeat;
     background-size: auto;
     background-color: transparent;
     height: 95vh;
-    width: 100vw;
+    width: 100vw !important;
 }
+
+.fourofour-image .jumbotron {
+    text-align: center !important;
+}
+
 .full-width {
     width: 100vw;
 }

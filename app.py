@@ -16,12 +16,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
+app.secret_key = b'ab245pfd20\n\xec]/'
+
 ###DB Collections
 MONGODB_URI = os.environ.get("MONGO_PM_MONGO")
 DBS_NAME = "recipes_db"
 COLLECTION_NAME = "desserts"
 app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
-app.secret_key = os.getenv("SECRET_KEY")
+#app.secret_key = os.getenv("SECRET_KEY")
 mongo = PyMongo(app)
 users = mongo.db.users
 
@@ -359,3 +361,4 @@ def dropdown_uom():
 
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+    
