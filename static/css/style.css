@@ -1,5 +1,6 @@
 body {
-    background-color: #FFFAF0; /*Seashell*/
+    background-color: #FFFAF0; /*Seashell*/    
+    min-height: calc(100vh - 70px);
 }
 
 h1 {
@@ -7,12 +8,19 @@ h1 {
 }
 .navbar {
     background-color: #2A1911; /*Same brown as image in masthead*/
+    margin-bottom: 10px;
     /* background-color: #FFFAF0; */
 }
 .navbar-dark .navbar-brand {
     color: #fff;
     font-family: Molle;
     font-size: 2.5em;
+}
+
+.footer{
+    bottom:0 !important;
+    height: 50px;
+
 }
 
 /*Page Corner Fold Effect*/
@@ -153,7 +161,7 @@ h1 {
 
 .fourofour-image {
     background-image: url('../img/chef-thinking.jpg') !important; 
-    background-repeat: no-repeat;
+    background-repeat: round;
     background-size: auto;
     background-color: transparent;
     height: 95vh;

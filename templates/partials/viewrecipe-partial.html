@@ -13,7 +13,7 @@
     <br>
 	<h3>{{recipe.recipe_description}}</h3>
 	Recipe submitted by <em>{{recipe.author}}</em>
-        {% if user %}
+        {% if recipe.author == session['user'] %}
     <div class="col-xs-12 col-md-6">        
 		<a href="{{ url_for('edit_recipe', dessert_id=recipe._id)}}" class="waves-effect waves-light btn btn-small-b"><i class="fa fa-edit"></i>Edit</a>
     </div>   

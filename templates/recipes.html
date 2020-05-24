@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
-<h1 align="center">Just Desserts</h1>
+<h1 class="mt-5" align="center">Just Desserts</h1>
 
 <div class="container full-width">
     {% if total > 1 %}
         {% include 'partials/recipecard.html' %}
-	    {% include 'partials/pagination.html' %}
+	    
     {% endif %} 
 </div>
 

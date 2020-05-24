@@ -106,23 +106,8 @@ def profile(user):
 		return render_template('profile.html', user=user_in_db)
 	else:
 		flash("You must be logged in!")
-		return redirect(url_for('homepage_index'))
+		return redirect(url_for('user_home'))
 
-# Admin area
-@app.route('/admin')
-def admin():
-	if 'user' in session:
-		if session['username'] == "admin":
-			return render_template('admin.html')
-		else:
-			flash('Only Admins can access this page!')
-			return redirect(url_for('index'))
-	else:
-		flash('You must be logged')
-		return redirect(url_for('homepage_index'))
-
-        
-    
 
 @app.route('/user/login/page')
 def login_page():
@@ -133,10 +118,13 @@ def login_page():
 def login():
 	# Check if user is not logged in already
 	if 'user' in session:
+        
 		user_in_db = users.find_one({"username": session['user']})
+        
 		if user_in_db:
 			# If so redirect user to their profile
 			#flash("You are logged in already!")
+            #session['user'] = user_in_db['username']
 			return redirect(url_for('profile', user=user_in_db['username']))
 	else:
 		# Render the page for user to be able to log in
@@ -152,14 +140,9 @@ def user_auth():
 	if user_in_db:
 		# If passwords match (hashed / real password)
 		if check_password_hash(user_in_db['password'], form['user_password']):
-			# Log user in (add to session)
-			session['user'] = form['username']
-			# If the user is admin redirect him to admin area
-			if session['user'] == "admin":
-				return redirect(url_for('admin'))
-			else:
-				flash("You were logged in!")
-				return redirect(url_for('profile', user=user_in_db['username']))
+            #session['user'] = user_in_db['username']
+			flash("You were logged in!")
+			return redirect(url_for('profile', user=user_in_db['username']))
 			
 		else:
 			flash("Wrong password or user name!")
@@ -177,46 +160,34 @@ def paginate_recipes(offset=0, per_page=6):
 
 
 #Recipes Page
-@app.route('/recipes/',defaults={'page': 1}, methods=['GET']) #defaults={'page': 1},
-@app.route('/recipes/page/<int:page>', methods=['GET'])
+@app.route('/recipes/', methods=['GET']) 
     
-def get_recipes(page):
+def get_recipes():
 
     dessert = mongo.db.desserts
-    #First Page
-    #desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6)
-    #Second Page
-    #dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6).skip(6)
-    #Third Page
-    #dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(6).skip(6)
+    
     total = mongo.db.desserts.count()
-    limit = 6
-    num_of_pages = total/limit + 1
-    pagination = get_pagination(page=page,
-                            per_page=limit,   #results per page
-                            total=total,         #total number of results 
-                            format_total=True,   #format total. example 1,024
-                            format_number=True,  #turn on format flag
-                            record_name='recipes', #provide context
-                            )
-    #page_number = int
-    #skipped = (page_number - 1) * limit
+    
     offset = 0
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
-    desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING).limit(limit)
-    documents_cursor = mongo.db.desserts.find() # returns a cursor. you can sort at this point
-    desserts_in_page = documents_cursor.skip(6).limit(limit)
+    desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING)#.limit(limit)
+    documents_cursor = mongo.db.desserts.find() 
     
-    return render_template("recipes.html", recipes=desserts, pagination=pagination, page=page,
-    total=total, per_page=limit)
+    return render_template("recipes.html", recipes=desserts, total=total)
 
 
-@app.route('/recipes/new/<user_id>', methods=['GET'])
-def add_recipe(user_id):
-    users = mongo.db.users.find()
-    the_user = mongo.db.users.find_one({"_id": ObjectId(user_id)})   
-    return render_template("addrecipe.html", users=users, the_user=the_user)
+@app.route('/recipes/new')
+def add_recipe():
+    form = request.form.to_dict()
+    user_in_db = users.find_one({"username": form['username']})
+        # Check for user in database
+    if user_in_db:
+        session['userid'] = user_in_db._id
+        return render_template("addrecipe.html", session=session) 
+    else:    
+	    return redirect(url_for('login'))
+
 
 #Adding Recipe
 @app.route('/recipe/insert', methods=['POST'])
@@ -255,10 +226,12 @@ def update_recipe(dessert_id):
         'recipe_description':request.form.get('recipe_description'),
         'ingredients':request.form.get('ingredients'),
         'equipment_needed':request.form.get('equipment_needed'),
-        # 'method':request.form.get['method'],
+        'method':request.form.get['method'],
         'gluten_free':request.form.get('gluten_free'),
         'contains_nuts':request.form.get('contains_nuts'),
-        'vegan_friendly':request.form.get('vegan_friendly')
+        'vegan_friendly':request.form.get('vegan_friendly'),
+        'author':request.form.get('author'),
+        'img_url':request.form.get('img_url')
     }
     desserts.update({"_id": ObjectId(dessert_id)}, recipe_edit),  
     return redirect(url_for('edit_success'))

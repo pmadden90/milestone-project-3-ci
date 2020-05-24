@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" href="../img/just_desserts_ico.ico" type="image/x-icon" />
+    <link rel="icon" href="{{url_for('static', filename='img/just_desserts.ico')}}" type="image/x-icon" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Just Desserts">
@@ -11,7 +11,7 @@
 	<title>Just Desserts</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{url_for ('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 	<!-- Materialize CDN
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -24,7 +24,7 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
     <!-- Custom styles for this template -->
-	<link href="../static/css/heroic-features.css" rel="stylesheet">
+	<link href="{{url_for ('static', filename='static/css/heroic-features.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css"/> 
 </head>
 
@@ -55,7 +55,7 @@
 	<hr>
 
 	<!-- Footer -->
-	<footer>
+	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10 mx-auto">
@@ -92,8 +92,8 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../static/vendor/jquery/jquery.min.js"></script>
-	<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+	<script src="{{url_for ('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     
     <!--jQuery for Materialize
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>-->
