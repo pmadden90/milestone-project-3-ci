@@ -132,25 +132,29 @@ def login():
 
 
 # Check user login details from login form
-@app.route('/user_auth', methods=['POST'])
-def user_auth():
-	form = request.form.to_dict()
-	user_in_db = users.find_one({"username": form['username']})
-	# Check for user in database
-	if user_in_db:
-		# If passwords match (hashed / real password)
-		if check_password_hash(user_in_db['password'], form['user_password']):
-            #session['user'] = user_in_db['username']
-			flash("You were logged in!")
-			return redirect(url_for('profile', user=user_in_db['username']))
-			
-		else:
-			flash("Wrong password or user name!")
-			return redirect(url_for('login'))
-	else:
-		flash("You must be registered!")
-		return redirect(url_for('signup'))
 
+
+@app.route('/auth/user', methods=['POST'])
+def user_auth():
+    form = request.form.to_dict()
+    
+    user_in_db = users.find_one({"username": form['username']})
+    print('Before if statement')
+    if user_in_db:
+        if check_password_hash(user_in_db['password'], form['password']):  
+                     
+            session['username'] = user_in_db['username']
+            print('Hello')
+            print(session)
+            flash("You are logged in")
+            return redirect(url_for('profile', user=user_in_db['username']))
+        else:
+            print('After else')
+            flash("Wrong password or username")
+            return redirect(url_for('login'))
+    else:
+        flash("You must be registered")
+        return redirect(url_for('signup'))
 
 #Pagination
 def paginate_recipes(offset=0, per_page=6):
@@ -179,12 +183,8 @@ def get_recipes():
 
 @app.route('/recipes/new')
 def add_recipe():
-    form = request.form.to_dict()
-    user_in_db = users.find_one({"username": form['username']})
-        # Check for user in database
-    if user_in_db:
-        session['userid'] = user_in_db._id
-        return render_template("addrecipe.html", session=session) 
+    if 'username' in session:        
+        return render_template("addrecipe.html") 
     else:    
 	    return redirect(url_for('login'))
 
@@ -194,6 +194,7 @@ def add_recipe():
 def insert_recipe():
     desserts = mongo.db.desserts    
     recipe_to_be_inserted = request.form
+    import pdb; pdb.set_trace() 
     recipe = recipe_to_be_inserted.to_dict()
     desserts.insert_one(recipe)
     return redirect(url_for('insert_success'))
@@ -330,7 +331,7 @@ def dropdown_uom():
         for item in measurement.get("uom_name")]
 
 
-    # import pdb; pdb.set_trace()
+    
 
 if __name__ == '__main__':
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
