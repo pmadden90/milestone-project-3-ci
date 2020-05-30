@@ -141,11 +141,9 @@ def user_auth():
     user_in_db = users.find_one({"username": form['username']})
     print('Before if statement')
     if user_in_db:
-        if check_password_hash(user_in_db['password'], form['password']):  
-                     
-            session['username'] = user_in_db['username']
-            print('Hello')
-            print(session)
+        if check_password_hash(user_in_db['password'], form['password']):                      
+            session['username'] = user_in_db['username']       
+            
             flash("You are logged in")
             return redirect(url_for('profile', user=user_in_db['username']))
         else:
@@ -167,22 +165,19 @@ def paginate_recipes(offset=0, per_page=6):
 @app.route('/recipes/', methods=['GET']) 
     
 def get_recipes():
-
-    dessert = mongo.db.desserts
-    
-    total = mongo.db.desserts.count()
-    
+    dessert = mongo.db.desserts    
+    total = mongo.db.desserts.count()    
     offset = 0
     starting_id = dessert.find().sort('_id', pymongo.ASCENDING)
     last_id = starting_id[offset]['_id']
     desserts = dessert.find({'_id': {'$gte': last_id}}).sort('recipe_name', pymongo.ASCENDING)#.limit(limit)
-    documents_cursor = mongo.db.desserts.find() 
-    
+    documents_cursor = mongo.db.desserts.find()     
     return render_template("recipes.html", recipes=desserts, total=total)
 
 
 @app.route('/recipes/new')
 def add_recipe():
+    username = session['username']
     if 'username' in session:        
         return render_template("addrecipe.html") 
     else:    
@@ -190,11 +185,11 @@ def add_recipe():
 
 
 #Adding Recipe
-@app.route('/recipe/insert', methods=['POST'])
+@app.route('/recipe/new', methods=['GET', 'POST'])
 def insert_recipe():
-    desserts = mongo.db.desserts    
-    recipe_to_be_inserted = request.form
-    import pdb; pdb.set_trace() 
+    desserts = mongo.db.desserts  
+    recipe_to_be_inserted = request.form    
+    #import pdb; pdb.set_trace() 
     recipe = recipe_to_be_inserted.to_dict()
     desserts.insert_one(recipe)
     return redirect(url_for('insert_success'))
@@ -227,7 +222,7 @@ def update_recipe(dessert_id):
         'recipe_description':request.form.get('recipe_description'),
         'ingredients':request.form.get('ingredients'),
         'equipment_needed':request.form.get('equipment_needed'),
-        'method':request.form.get['method'],
+        'method':request.form.get('method'),
         'gluten_free':request.form.get('gluten_free'),
         'contains_nuts':request.form.get('contains_nuts'),
         'vegan_friendly':request.form.get('vegan_friendly'),
@@ -257,9 +252,7 @@ def delete_success():
 ###EQUIPMENT
 @app.route('/equipment')
 def get_equipment():
-
     shop = mongo.db.equipment
-
     offset = int(request.args.get('offset')) if request.args.get('offset') else 1
     limit = int(request.args.get('limit')) if request.args.get('offset') else 8
     page = int(request.args.get('page', 2))

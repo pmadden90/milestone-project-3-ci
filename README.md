@@ -1,3 +1,4 @@
+
 # Just Desserts
 
 Just Desserts is a web based application for sharing recipes for desserts.
@@ -18,17 +19,21 @@ Use this section to provide insight into your UX process, focusing on who this w
 ####As a user, I would like to be able to find equipment I might want to purchase related to the recipes
 
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+Please use the following link to access the Figma Wireframe for Just Desserts - https://www.figma.com/file/pcRVh2MevzPhD7HzAyDv5l/Recipe-Site?node-id=0%3A1
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
+
  
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+- REGISTRATION - allows users create profiles, by having them fill out a registration form
+- LOGIN - allows previously registered users to log back in
+- ADD RECIPES - allows users logged in to add a recipe to the database, by having them fill out a recipe form
+- EDIT RECIPES - allows users logged in to edit the recipes they have previously submitted
+- DELETE RECIPES - allows users logged in to delete the recipes they have previously submitted
+- VIEW RECIPES - allows any users to view existing recipes in the database
+- SHOP - allows users to view and purchase related equipment to baking
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
 
 In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
@@ -36,7 +41,7 @@ In addition, you may also use this section to discuss plans for additional featu
 - Initially, I attempted to set up a virtualenv as per suggestion of mentor however after discussing with a tutor via webchat, I discovered that a virtualenv is more difficult to set up on Gitpod 
 so this was abandoned. 
 - A rating system - up to 5 stars.
-- I spent some time trying to implement a login function but it caused me delays and issues so decided to press on without it
+- I spent some time trying to implement a pagination function but it caused me delays and issues so decided to press on without it
 
 ## Technologies Used
 
@@ -63,7 +68,7 @@ Whenever it is feasible, prefer to automate your tests, and if you've done so, p
 
 For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
 
-1. Contact form:
+1. Registration form:
     1. Go to the "Contact Us" page
     2. Try to submit the empty form and verify that an error message about the required fields appears
     3. Try to submit the form with an invalid email address and verify that a relevant error message appears

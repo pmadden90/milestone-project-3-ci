@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Just Desserts</h1>
+<h1 class="mt-5">Just Desserts</h1>
 <div class="center">
     <div class="container full-width">
         <h3 align="center">Editing {{ recipe.recipe_name }}</h3>
@@ -30,7 +30,7 @@
 					                <div class="form-group">
 						                <i class="fa fa-pencil"><label class="col-sm-2 col-form-label" for="icon_prefix">Author</label></i>
 						                <div class="row">
-							                <input id="author" name="author" type="text" placeholder="{{recipe.author}}" readonly>
+							                <input id="author" name="author" type="text" value="{{recipe.author}}" readonly>
                                         </div>
 					                </div>
 				                </div>
@@ -109,7 +109,7 @@
 					                <div class="form-group">
 						                <div class="input-field col s12 m12">
 							                <i class="fa fa-photo"><label class="col-sm-2 col-form-label" for="icon_prefix">Image URL</label></i>
-							                <input id="img_url" name="img_url" type="text" placeholder="{{recipe.img_url}}">
+							                <input id="img_url" name="img_url" type="text" value="{{recipe.img_url}}">
 				                        </div>
 					                </div>
 				                </div>

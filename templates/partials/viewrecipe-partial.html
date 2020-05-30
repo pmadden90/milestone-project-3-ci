@@ -27,12 +27,16 @@
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fa fa-spoon"><label for="icon_prefix"> Equipment Needed</label></i>
         </button>
-      </h5>
+      </h4>
     </div>
 
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
-        {{recipe.equipment_needed}}
+      {{recipe.equipment_needed}}
+      <br>            
+		<a href="{{ url_for('get_equipment')}}" class="btn btn-secondary btn-small"><i class="fas fa-utensils"></i>Buy Equipment</a>
+    
+        
       </div>
     </div>
   </div>
