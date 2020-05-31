@@ -38,6 +38,7 @@ Please use the following link to access the Figma Wireframe for Just Desserts - 
 In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
+- The navbar link to personal profile - not working but intention would be for user to be able to see all their recipes on that page and ability to log out
 - Initially, I attempted to set up a virtualenv as per suggestion of mentor however after discussing with a tutor via webchat, I discovered that a virtualenv is more difficult to set up on Gitpod 
 so this was abandoned. 
 - A rating system - up to 5 stars.
@@ -52,7 +53,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
 - [Bootstrap]  (https://getbootstrap.com/)
     - The project uses **Bootstrap** for styling and layout.
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-    - The project uses **Flask* to...
+    
 - [MongoDB] https://www.mongodb.com/)
     - The project uses **MongoDB** for creating, reading, updating and deleting data from a database.
 - [Heroku]  (https://Heroku.com/)
@@ -62,7 +63,16 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+#####As a user, I want to browse and search for dessert recipes.
+Tested on Chrome, Edge and Firefox - working
+#####As a user, I would like to see potential allergens in the recipes.
+Tested on Chrome, Edge and Firefox - working
+#####As a registered user, I would like to submit my own recipes for others to see
+
+#####As a registered user, I would like to be able to edit my recipes and delete if necessary
+
+#####As a user, I would like to be able to find equipment I might want to purchase related to the recipes
+Tested on Chrome, Edge and Firefox - working
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
 

@@ -27,7 +27,6 @@ app.config["MONGO_URI"] = os.getenv("MONGO_PM_MONGO")
 mongo = PyMongo(app)
 users = mongo.db.users
 
-
 ###Routes
 #Homepage
 @app.route('/')
@@ -138,8 +137,7 @@ def login():
 def user_auth():
     form = request.form.to_dict()
     
-    user_in_db = users.find_one({"username": form['username']})
-    print('Before if statement')
+    user_in_db = users.find_one({"username": form['username']})   
     if user_in_db:
         if check_password_hash(user_in_db['password'], form['password']):                      
             session['username'] = user_in_db['username']       
@@ -175,7 +173,7 @@ def get_recipes():
     return render_template("recipes.html", recipes=desserts, total=total)
 
 
-@app.route('/recipes/new')
+@app.route('/recipe/new')
 def add_recipe():
     username = session['username']
     if 'username' in session:        
@@ -214,7 +212,7 @@ def edit_recipe(dessert_id):
 
 
 #Updating Recipe In MongoDB
-@app.route('/recipe/<dessert_id>/update', methods=["GET", "POST"])
+@app.route('/recipe/<dessert_id>/edit', methods=["GET", "POST"])
 def update_recipe(dessert_id):
     desserts = mongo.db.desserts
     recipe_edit = {
