@@ -92,27 +92,36 @@ If this section grows too long, you may want to split it off into a separate fil
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+Project has been deployed via Heroku and is accessible here - https://ci-mp4-shannongaels.herokuapp.com/
+ The process for deployment was as follows: Project pushed to GitHub repository Navigated to Settings in relevant GitHub repository Under GitHub Pages, selected relevant branch (master branch) and saved
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+Local Deployment
+Go to directory you would like to clone this project to. Download or clone this link https://github.com/pmadden90/mp4-ecommerce-store and open in your chosen directory.
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+git clone https://github.com/pmadden90/mp4-ecommerce-store.git
 
+This site is currently deployed on [Heroku](https://www.heroku.com/) using the **master** branch on GitHub. When the project has been setup locally, you can proceed to deploy it remotely with the following steps:
+
+- Create a **requirements.txt** file so Heroku can install the required dependencies to run the app:
+    - pip3 freeze --local > requirements.txt`
+    - The *requirements.txt* file for this project can be found here: [requirements.txt](project/requirements.txt)
+- Create a **Procfile** to tell Heroku what type of application is being deployed using *gunicorn*, and how to run it:
+    - web: gunicorn main.wsgi:application > Procfile`
+    - The *Procfile* for this project can be found here: [Procfile](project/Procfile)
+- Sign up for a free Heroku account, create your project app, and click the **Deploy** tab, at which point you can *Connect GitHub* as the Deployment Method, and select *Enable Automatic Deployment*.
+
+- In the Heroku **Settings** tab, click on the *Reveal Config Vars* button to configure environmental variables. You will need to copy/paste all of the *.env* key value pairs into the config variables, but please omit the *development=1* variable; this is only for local deployment.
 
 ## Credits
 The login form was sourced from Bootsnipp - https://bootsnipp.com/snippets/vl4R7
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
 - The photos used in this site were obtained from pexels.com
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
 
 The page corner folds CSS was from http://nicolasgallagher.com/pure-css-folded-corner-effect/
+
+TravelTim - credited as I have used some of his readme file (from here - https://raw.githubusercontent.com/TravelTimN/ci-milestone05-fsfw/master/README.md) to help write some of the deployment section of this readme.
